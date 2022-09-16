@@ -1,0 +1,7 @@
+{
+    "serverUrl": "http://localhost:8080",
+    "realm": "test",
+    "clientId": "vue-test-app",
+    "checkLoginIframe": false,
+    "public-client": true
+}
