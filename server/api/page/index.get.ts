@@ -1,11 +1,7 @@
-import { AUTH_USE_PROJECTION, GET_DOCS, AUTH_CHECK, GET_ENCODED_ROLES, GET_PAGES } from '@/server/lib/firestore';
+import { GET_DOCS, GET_PAGES } from '@/server/lib/firestore';
 
 export default defineEventHandler(async (event) => {
 	try {
-		const roles = await GET_ENCODED_ROLES(event);
-		if (!AUTH_CHECK(event, roles)) {
-			throw createError({ statusCode: 403, statusMessage: 'message.permission_error' });
-		}
 		const query = useQuery(event.req);
 		const where = query.where ? JSON.parse(query.where as any) : null;
 		let result;
@@ -14,9 +10,8 @@ export default defineEventHandler(async (event) => {
 		} else {
 			result = await GET_DOCS('page', where);
 		}
-		result = result.filter((item) => AUTH_CHECK(event, roles, item.syscode));
 		return {
-			result: AUTH_USE_PROJECTION(event, roles, result),
+			result: result,
 		};
 	} catch (error) {
 		const data =

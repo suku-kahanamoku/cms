@@ -7,11 +7,6 @@
 	const drawer = ref(undefined || true);
 	/* const innerW = window.innerWidth; */
 	const { mdAndUp, mdAndDown } = useDisplay();
-	onMounted(() => {
-		/* if (innerW < 950) {
-    drawer.value = !drawer.value;
-  } */
-	});
 </script>
 <template>
 	<div>

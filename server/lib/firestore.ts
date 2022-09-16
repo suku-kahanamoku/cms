@@ -496,10 +496,7 @@ export async function GET_STORAGE() {
  * @returns {*}
  */
 export async function GET_PAGES(event, colName: string, params) {
-	const roles = await GET_ENCODED_ROLES(event);
 	let pageRefs = await GET_DOCS(colName, params);
-	// vrati jen ty pageConfig, ke kterym ma uzivatel opravneni a neni na nich nastaveno visible=false
-	pageRefs = pageRefs.filter((item) => AUTH_CHECK(event, roles, item.syscode));
 	// seradi dle pos a vytvori strom
 	pageRefs = pageRefs
 		.map((pageConfig) => {

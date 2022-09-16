@@ -1,17 +1,12 @@
-import { AUTH_USE_PROJECTION, GET_DOCS, AUTH_CHECK, GET_ENCODED_ROLES } from '@/server/lib/firestore';
+import { GET_DOCS } from '@/server/lib/firestore';
 
 export default defineEventHandler(async (event) => {
 	try {
-		const roles = await GET_ENCODED_ROLES(event);
-		if (!AUTH_CHECK(event, roles)) {
-			throw createError({ statusCode: 403, statusMessage: 'message.permission_error' });
-		}
 		const query = useQuery(event.req);
 		const where = query.where ? JSON.parse(query.where as any) : null;
-		let result = await GET_DOCS('role', where);
-		result = result.filter((item) => AUTH_CHECK(event, roles, item.syscode));
+		const result = await GET_DOCS('role', where);
 		return {
-			result: AUTH_USE_PROJECTION(event, roles, result),
+			result: result,
 		};
 	} catch (error) {
 		const data =
