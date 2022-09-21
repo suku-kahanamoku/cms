@@ -1,8 +1,7 @@
 <script setup lang="ts">
-	async function logout() {
-		await useApi('/api/signout');
-		navigateTo('/');
-	}
+	import { Ref } from 'vue';
+
+	async function logout() {}
 </script>
 
 <template>

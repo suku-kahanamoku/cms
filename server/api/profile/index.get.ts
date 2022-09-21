@@ -1,10 +1,10 @@
-import { GET_PROFILES } from '@/server/lib/firestore';
+import { GET_PROFILES } from '~~/server/lib/keycloak';
 
 export default defineEventHandler(async (event) => {
 	try {
 		const query = useQuery(event.req);
 		const where = query.where ? JSON.parse(query.where as any) : null;
-		const result = await GET_PROFILES(where);
+		const result = await GET_PROFILES(event, where);
 		return {
 			result: result,
 		};

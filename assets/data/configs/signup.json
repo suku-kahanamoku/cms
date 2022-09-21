@@ -1,0 +1,54 @@
+{
+    "title": "route.signup",
+    "color": "primary",
+    "theme": "card",
+    "method": "POST",
+    "restUrl": "",
+    "submitUrl": "/api/signup",
+    "fields": [
+        {
+            "name": "firstname",
+            "label": "form.firstname",
+            "required": true,
+            "autocomplete": "given-name",
+            "autofocus": true
+        },
+        {
+            "name": "lastname",
+            "label": "form.lastname",
+            "required": true,
+            "autocomplete": "family-name"
+        },
+        {
+            "type": "email",
+            "name": "email",
+            "label": "form.email",
+            "required": true,
+            "autocomplete": "email",
+            "autofocus": true,
+            "validation": {
+                "msg": "form.msg.wrong_email",
+                "pattern": "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+            }
+        },
+        {
+            "type": "tel",
+            "name": "phone",
+            "label": "form.phone",
+            "autocomplete": "tel"
+        },
+        {
+            "type": "password",
+            "name": "password",
+            "label": "form.password",
+            "required": true,
+            "autocomplete": "new-password"
+        },
+        {
+            "type": "password",
+            "name": "repeat_pass",
+            "label": "form.repeat_pass",
+            "required": true
+        }
+    ]
+}

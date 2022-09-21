@@ -1,0 +1,22 @@
+{
+    "title": "route.reset_pass",
+    "color": "primary",
+    "theme": "card",
+    "method": "POST",
+    "restUrl": "",
+    "submitUrl": "/api/signreset",
+    "fields": [
+        {
+            "type": "email",
+            "name": "email",
+            "label": "form.email",
+            "required": true,
+            "autocomplete": "email",
+            "autofocus": true,
+            "validation": {
+                "msg": "form.msg.wrong_email",
+                "pattern": "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+            }
+        }
+    ]
+}

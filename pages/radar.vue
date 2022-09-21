@@ -6,7 +6,8 @@
 	import MapContainer from '@/components/ol/MapContainer.vue';
 
 	definePageMeta({
-		syscode: 'radar',
+		title: 'route.radar',
+		pos: 2
 	});
 
 	provide('OlService', new OlService());

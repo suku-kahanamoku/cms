@@ -2,30 +2,12 @@
 	import Form from '@/core/form/Form.vue';
 
 	definePageMeta({
-		syscode: 'contact',
+		title: 'route.contact',
+		pos: 3,
 	});
-
-	const pageConfig = useState('pageConfig').value as any;
-	const configs = reactive({} as any);
-	const loading = ref(false);
-
-	onMounted(async () => {
-		// nacte a inicializuje konfigurace pro vnitrni komponenty
-		const result = await loadConfigs(pageConfig?.configs, loading);
-		result?.forEach((tmpConfig) => (configs[tmpConfig.syscode] = tmpConfig));
-	});
-
-	function onSubmit(e): void {
-		if (e.id) {
-		}
-	}
 </script>
 <template>
 	<div>
-		<template v-if="Object.keys(configs).length">
-			<Form v-for="config in configs" :config="config" @submit="onSubmit" />
-		</template>
-
-		<v-alert v-else-if="loading" type="error">{{ $t('message.not_found') }}</v-alert>
+		{{ $kc?.hasResourceRole('client-test-role') }}
 	</div>
 </template>

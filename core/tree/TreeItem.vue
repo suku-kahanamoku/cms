@@ -10,7 +10,7 @@
 				v-bind="props"
 				rounded="lg"
 				class="mb-1"
-				:title="$t(data.title || 'empty')"
+				:title="$t(data.meta.title || 'empty')"
 				:prepend-icon="data.icon?.pos !== 'after' && data.icon?.value"
 				:after-icon="data.icon?.pos === 'after' && data.icon?.value"
 			></v-list-item>
@@ -24,7 +24,7 @@
 					:to="child.path"
 					rounded="lg"
 					class="mb-1 pl-1"
-					:title="$t(child.title || 'empty')"
+					:title="$t(child.meta.title || 'empty')"
 					:prepend-icon="child.icon?.pos !== 'after' && child.icon?.value"
 					:after-icon="child.icon?.pos === 'after' && child.icon?.value"
 				></v-list-item>

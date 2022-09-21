@@ -1,0 +1,7 @@
+{
+    "title": "info.json",
+    "color": "primary",
+    "method": "PATCH",
+    "restUrl": "",
+    "submitUrl": "/api/profile?where={\"id\":\"${route.params.id.0}\"}"
+}

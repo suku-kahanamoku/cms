@@ -2,7 +2,8 @@
 	import { CLONE } from '@/core/utils/modify-object.function';
 
 	definePageMeta({
-		syscode: 'home',
+		title: 'route.home',
+		visible: false,
 	});
 </script>
 <template>

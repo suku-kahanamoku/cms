@@ -8,76 +8,36 @@
  */
 export default async function (to, from) {
 	if (useState('isClient')?.value) {
-		// stahne vsechny pageConfigs, do kterych ma uzivatel pravo vstoupit
-		return await $fetch('/api/page?tree=1')
-			.then((data: any) => {
-				const configs = data.result;
-				const pageRoutes = getPageRoutes(configs);
-				const pageConfig = getPageConfig(pageRoutes.routes, to.meta?.syscode);
-				// nastavi globalni promene pages a routes
-				setStore('pages', pageRoutes.pages);
-				setStore('routes', pageRoutes.routes);
-				// pokud existuje (ma opravneni) pageConfig, nastavi pageConfig a vrati true
-				if (pageConfig) {
-					setStore('pageConfig', pageConfig);
-				} else {
-					throw createError({ statusCode: 401, statusMessage: 'message.unauthorized' });
-				}
-				return true;
-			})
-			.catch((error): any => {
-				return navigateTo((useState('pages') as any)?.login?.path);
-			});
+		const routes = useRouter().getRoutes();
+		routes.forEach((route: any) => {
+			route.children = routes
+				.filter(
+					(child: any) =>
+						child.name !== 'index' &&
+						child !== route &&
+						child.meta.visible !== false &&
+						child.name !== `${route.name}-id` &&
+						child.name.indexOf(route.name) >= 0
+				)
+				.sort((a: any, b: any) => (a.meta.pos || 0) - (b.meta.pos || 0));
+			const parent = routes.find(
+				(parent: any) =>
+					parent.name !== 'index' &&
+					parent !== route &&
+					parent.meta.visible !== false &&
+					route.name !== `${parent.name}-id` &&
+					route.name.indexOf(parent.name) >= 0
+			);
+			if (parent) {
+				route.meta.parentName = parent.name;
+			}
+		});
+		setStore(
+			'routes',
+			routes
+				.filter((route) => !route.meta.parentName && route.meta.visible !== false)
+				.sort((a: any, b: any) => (a.meta.pos || 0) - (b.meta.pos || 0))
+		);
 	}
 	return true;
-}
-
-/**
- * Vybere pageConfig
- *
- * @param {any[]} configs
- * @param {string} syscode
- * @returns {*}
- */
-function getPageConfig(configs: any[], syscode: string) {
-	let pageConfig = configs?.find((config) => config.syscode === syscode);
-	if (!pageConfig) {
-		for (const config of configs) {
-			if (config.children?.length) {
-				const tmpConfig = getPageConfig(config.children, syscode);
-				if (tmpConfig) {
-					pageConfig = tmpConfig;
-					break;
-				}
-			}
-		}
-	}
-	return pageConfig;
-}
-
-/**
- * Vrati vsechny routy, do kterych ma opravneni vstoupit
- *
- * @param {any[]} configs
- * @returns {*}
- */
-function getPageRoutes(configs: any[]) {
-	const routes = useRouter()
-		.getRoutes()
-		.filter((route: any) => getPageConfig(configs, route.meta?.syscode))
-		.map((route: any) => {
-			const pageConfig = getPageConfig(configs, route.meta?.syscode);
-			pageConfig.path = route.path;
-			return pageConfig;
-		})
-		.filter((route) => !route.parentId);
-
-	const pages: any = {};
-	routes.forEach((route) => {
-		pages[route.syscode || route.name] = route;
-	});
-	return {
-		routes: routes,
-		pages: pages,
-	};
 }

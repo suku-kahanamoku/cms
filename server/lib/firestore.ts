@@ -270,7 +270,7 @@ export async function VERIFY(event): Promise<boolean> {
  */
 export async function GET_TOKEN_DATA(event): Promise<DecodedIdToken> {
 	let result;
-	const token = getCookie(event, 'x-xsrf-token');
+	const token = getCookie(event, 'x-acc-token');
 	if (token) {
 		try {
 			result = await getAuth().verifyIdToken(token);
@@ -292,18 +292,15 @@ export async function GET_TOKEN_DATA(event): Promise<DecodedIdToken> {
  * @param {string} [uid]
  * @param {string} [role]
  */
-export async function SET_TOKEN(event, token: string, uid?: string, role?: string) {
+export async function SET_TOKEN(event, token: string, userId?: string) {
 	if (token) {
-		setCookie(event, 'x-xsrf-token', token);
-		if (role) {
-			setCookie(event, 'x-role', role);
-		}
+		setCookie(event, 'x-acc-token', token);
+		setCookie(event, 'x-ref-token', token);
+		setCookie(event, 'user-id', userId);
 	} else {
-		deleteCookie(event, 'x-xsrf-token');
-		deleteCookie(event, 'x-role');
-		if (uid) {
-			getAuth().revokeRefreshTokens(uid);
-		}
+		deleteCookie(event, 'x-acc-token');
+		deleteCookie(event, 'x-ref-token');
+		deleteCookie(event, 'user-id');
 	}
 }
 

@@ -4,6 +4,7 @@
 	import TreeItem from '@/core/tree/TreeItem.vue';
 
 	const routes: any = useState('routes');
+	console.log(routes);
 </script>
 
 <template>
@@ -31,8 +32,8 @@
 							rounded="lg"
 							class="mb-1"
 							v-else
-							:value="route.title"
-							:title="$t(route.title || 'empty')"
+							:value="route.name"
+							:title="$t(route.meta.title || 'empty')"
 							:prepend-icon="route.icon?.pos !== 'after' && route.icon?.value"
 							:after-icon="route.icon?.pos === 'after' && route.icon?.value"
 						></v-list-item>

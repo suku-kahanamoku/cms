@@ -1,8 +1,8 @@
-import { LOGOUT } from '../lib/firestore';
+import { LOGOUT } from '../lib/keycloak';
 
 export default defineEventHandler(async (event) => {
 	try {
-		LOGOUT(event);
+		await LOGOUT(event);
 		return { status: 'OK', msgs: [{ type: 'success', message: 'message.success_logout' }] };
 	} catch (error) {
 		const data =

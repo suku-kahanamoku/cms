@@ -1,0 +1,29 @@
+{
+    "title": "route.login",
+    "color": "primary",
+    "theme": "card",
+    "method": "POST",
+    "restUrl": "",
+    "submitUrl": "/api/login",
+    "fields": [
+        {
+            "type": "email",
+            "name": "email",
+            "label": "form.email",
+            "required": true,
+            "autocomplete": "email",
+            "autofocus": true,
+            "validation": {
+                "msg": "form.msg.wrong_email",
+                "pattern": "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+            }
+        },
+        {
+            "type": "password",
+            "name": "password",
+            "label": "form.password",
+            "required": true,
+            "autocomplete": "current-password"
+        }
+    ]
+}

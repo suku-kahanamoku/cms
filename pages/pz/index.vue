@@ -1,6 +1,7 @@
 <script setup lang="ts">
 	definePageMeta({
-		syscode: 'pz',
+		title: 'route.pz',
+		pos: 1
 	});
 </script>
 
