@@ -3,32 +3,32 @@ import { ITERATE } from '@/utils/modify-object.function';
 import { GET_MARK, RESOLVE_MARKS, TRIM } from '@/utils/modify-string.functions';
 import { IFormField } from '@/components/form/field/field.interface';
 
-export default class Form {
+export default class FormController {
 	/**
 	 * Aktualni routa
 	 *
-	 * @memberof Form
+	 * @memberof FormController
 	 */
 	public route = useRoute();
 
 	/**
 	 * Nactena data
 	 *
-	 * @memberof Form
+	 * @memberof FormController
 	 */
 	public items = ref();
 
 	/**
 	 * Vybrany item
 	 *
-	 * @memberof Form
+	 * @memberof FormController
 	 */
 	public item = ref();
 
 	/**
 	 *
 	 *
-	 * @memberof Form
+	 * @memberof FormController
 	 */
 	public loading = ref();
 
@@ -36,7 +36,7 @@ export default class Form {
 	 * Creates an instance of Form.
 	 *
 	 * @param {*} config
-	 * @memberof Form
+	 * @memberof FormController
 	 */
 	constructor(public config) {
 		onMounted(this.process.bind(this));
@@ -46,7 +46,7 @@ export default class Form {
 	/**
 	 * Zrpacuje
 	 *
-	 * @memberof Form
+	 * @memberof FormController
 	 */
 	public process(): void {
 		this.resolveUrl();
@@ -56,7 +56,7 @@ export default class Form {
 	/**
 	 * Zkontroluje a zpracuje url => zjisti zda v nem neni config pro danou form komponentu
 	 *
-	 * @memberof Form
+	 * @memberof FormController
 	 */
 	public resolveUrl(): void {
 		try {
@@ -88,7 +88,7 @@ export default class Form {
 	 * @param {string} [url]
 	 * @param {*} [data]
 	 * @returns {*}  {Promise<void>}
-	 * @memberof Form
+	 * @memberof FormController
 	 */
 	public async load(url?: string, data?: any): Promise<void> {
 		this.loading.value = true;
@@ -126,7 +126,7 @@ export default class Form {
 	 * @param {*} form
 	 * @param {string} method
 	 * @returns {*}  {Promise<any>}
-	 * @memberof Form
+	 * @memberof FormController
 	 */
 	public async onSubmit(form, method: string): Promise<any> {
 		return await this._submit(RESOLVE_MARKS(this.config.submitUrl, this), form, this.config.fields, method);
@@ -142,7 +142,7 @@ export default class Form {
 	 * @param {*} [loading]
 	 * @param {string} [method='POST']
 	 * @returns {*}  {Promise<any>}
-	 * @memberof Form
+	 * @memberof FormController
 	 */
 	protected async _submit(url: string, vForm?, fields?, method = 'POST'): Promise<any> {
 		let result;
@@ -188,7 +188,7 @@ export default class Form {
 	 * @param {*} vForm
 	 * @param {IFormField[]} fields
 	 * @returns {*}  {*}
-	 * @memberof Form
+	 * @memberof FormController
 	 */
 	protected _getRestFields(vForm, fields: IFormField[]): any {
 		const result = {};
@@ -216,7 +216,7 @@ export default class Form {
 	 * @param {*} vForm
 	 * @param {IFormField[]} fields
 	 * @returns {*}  {string}
-	 * @memberof Form
+	 * @memberof FormController
 	 */
 	protected _getUrlParams(url: string, vForm, fields: IFormField[]): string {
 		let result = this._getUrlFields(vForm, fields);
@@ -232,7 +232,7 @@ export default class Form {
 	 * @param {*} vForm
 	 * @param {IFormField[]} fields
 	 * @returns {*}  {string}
-	 * @memberof Form
+	 * @memberof FormController
 	 */
 	protected _getUrlFields(vForm, fields: IFormField[]): string {
 		let result = '';
@@ -259,7 +259,7 @@ export default class Form {
 	 * @param {*} value
 	 * @param {*} [field]
 	 * @returns {*}  {*}
-	 * @memberof Form
+	 * @memberof FormController
 	 */
 	protected _getValue(value, field?: IFormField): any {
 		let result = value;
