@@ -12,18 +12,21 @@
 
 	const route = useRoute();
 	const data = ref([]);
+	const loading = ref();
 
 	onMounted(() => {
 		load(config.restUrl);
 	});
 
 	async function load(url: string) {
+		loading.value = true;
 		const result = await useApi(url);
 		result.forEach((item) => {
 			item.name = item.username;
 			item.path = `${route.path}/${item.id}`;
 		});
 		data.value = result;
+		loading.value = false;
 	}
 
 	async function onDelete(item) {
@@ -36,6 +39,8 @@
 
 <template>
 	<div>
-		<List :config="config" :data="data" @delete="onDelete" />
+		<v-progress-linear v-if="loading" indeterminate></v-progress-linear>
+
+		<List v-if="loading === false" :config="config" :data="data" @delete="onDelete" />
 	</div>
 </template>

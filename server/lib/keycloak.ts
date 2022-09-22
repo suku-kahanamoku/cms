@@ -28,7 +28,7 @@ export async function LOGIN(event, username: string, password: string): Promise<
 	});
 	const data = await keycloak.whoAmI.find();
 	if (data.userId && keycloak.accessToken) {
-		SET_TOKEN(event, keycloak.accessToken, data.userId);
+		SET_TOKEN(event, keycloak.accessToken, keycloak.refreshToken, data.userId);
 	}
 	return {
 		...data,
@@ -68,10 +68,10 @@ export async function AUTH_CHECK(event, roleGroup: string, role: string): Promis
 	return result;
 }
 
-export async function SET_TOKEN(event, token: string, userId?: string) {
-	if (token) {
-		setCookie(event, 'x-acc-token', token);
-		setCookie(event, 'x-ref-token', token);
+export async function SET_TOKEN(event, accToken: string, refToken?: string, userId?: string) {
+	if (accToken) {
+		setCookie(event, 'x-acc-token', accToken);
+		setCookie(event, 'x-ref-token', refToken);
 		setCookie(event, 'user-id', userId);
 	} else {
 		deleteCookie(event, 'x-acc-token');
