@@ -1,7 +1,7 @@
 <script setup lang="ts">
 	import Field from '@/components/form/field/Field.vue';
 	import Form from '@/components/form/Form';
-	import List from '@/components/List.vue';
+	import List from '@/components/list/List.vue';
 
 	const props = defineProps<{
 		config: any;
