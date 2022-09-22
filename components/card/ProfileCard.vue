@@ -18,7 +18,7 @@
 		</div>
 		<v-card-text>
 			<div class="p-4 text-center justify-center">
-				<h2 class="mb-0 mt-4 font-weight-regular">{{ data?.firstname }} {{ data?.lastname }}</h2>
+				<h2 class="mb-0 mt-4 font-weight-regular">{{ data?.firstName }} {{ data?.lastName }}</h2>
 				<small>{{ data?.email }}</small
 				><br />
 				<small>{{ data?.phone }}</small
@@ -33,7 +33,7 @@
 						{{ $t('method.delete') }}
 					</template>
 					<template v-slot:text>
-						{{ $t('query.delete', { name: data?.firstname + '&nbsp;' + data?.lastname }) }}
+						{{ $t('query.delete', { name: data?.firstName + '&nbsp;' + data?.lastName }) }}
 					</template>
 				</ConfirmDialog>
 			</div>

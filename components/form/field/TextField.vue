@@ -5,7 +5,7 @@
 	import { IS_DEFINED } from '@/utils/check.functions';
 
 	const props = defineProps<{
-		config: IFormField;
+		field: IFormField;
 		value?: any;
 	}>();
 
@@ -15,12 +15,12 @@
 
 	onMounted(() => {
 		// inicializuje regex
-		if (props.config?.validation?.pattern) {
-			rule.value = new RegExp(props.config.validation.pattern);
+		if (props.field?.validation?.pattern) {
+			rule.value = new RegExp(props.field.validation.pattern);
 		}
 		// nastavi defaultni hodnotu
-		if (IS_DEFINED(props.config.value)) {
-			fieldValue.value = props.config.value;
+		if (IS_DEFINED(props.field.value)) {
+			fieldValue.value = props.field.value;
 		}
 	});
 
@@ -34,35 +34,35 @@
 	<v-text-field
 		ref="el"
 		v-model="fieldValue"
-		:type="config.type || 'text'"
-		:id="config.name"
-		:name="config.name"
-		:label="$t(config.label || 'empty') + (config.required ? ' *' : '')"
-		:placeholder="$t(config.placeholder || 'empty')"
-		:disabled="config.disabled"
-		:readonly="config.readonly"
-		:autofocus="config.autofocus"
-		:counter="config.maxlength"
-		:hint="$t(config.hint || 'empty')"
-		:density="((config.density || 'comfortable') as any)"
-		:variant="((config.variant || 'outlined') as any)"
+		:type="field.type || 'text'"
+		:id="field.name"
+		:name="field.name"
+		:label="$t(field.label || 'empty') + (field.required ? ' *' : '')"
+		:placeholder="$t(field.placeholder || 'empty')"
+		:disabled="field.disabled"
+		:readonly="field.readonly"
+		:autofocus="field.autofocus"
+		:counter="field.maxlength"
+		:hint="$t(field.hint || 'empty')"
+		:density="((field.density || 'comfortable') as any)"
+		:variant="((field.variant || 'outlined') as any)"
 		:prepend-icon="
-			config.icon?.variant !== 'inner' && config.icon?.position !== 'append' ? config.icon?.value : undefined
+			field.icon?.variant !== 'inner' && field.icon?.position !== 'append' ? field.icon?.value : undefined
 		"
 		:append-icon="
-			config.icon?.variant !== 'inner' && config.icon?.position === 'append' ? config.icon.value : undefined
+			field.icon?.variant !== 'inner' && field.icon?.position === 'append' ? field.icon.value : undefined
 		"
 		:prepend-inner-icon="
-			config.icon?.variant === 'inner' && config.icon?.position !== 'append' ? config.icon?.value : undefined
+			field.icon?.variant === 'inner' && field.icon?.position !== 'append' ? field.icon?.value : undefined
 		"
 		:append-inner-icon="
-			config.icon?.variant === 'inner' && config.icon?.position === 'append' ? config.icon.value : undefined
+			field.icon?.variant === 'inner' && field.icon?.position === 'append' ? field.icon.value : undefined
 		"
 		:rules="[
-			(value) => (!value && config.required ? '' : true),
-			(value) => (value && rule ? rule.test(value) || $t(config.validation.msg || 'empty') : true),
+			(value) => (!value && field.required ? '' : true),
+			(value) => (value && rule ? rule.test(value) || $t(field.validation.msg || 'empty') : true),
 		]"
-		:clearable="config.clearable"
-		:autocomplete="config.autocomplete"
+		:clearable="field.clearable"
+		:autocomplete="field.autocomplete"
 	/>
 </template>

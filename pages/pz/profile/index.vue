@@ -1,7 +1,6 @@
 <script setup lang="ts">
-	import Form from '@/components/form/Form.vue';
-	import { GET_MARK } from '@/utils/modify-string.functions';
-	import { IS_OBJECT } from '@/utils/check.functions';
+	import List from '@/components/list/List.vue';
+	import config from '@/assets/data/configs/profile_list.json';
 
 	definePageMeta({
 		syscode: 'profile',
@@ -10,8 +9,33 @@
 			value: 'mdi-account',
 		},
 	});
+
+	const route = useRoute();
+	const data = ref([]);
+
+	onMounted(() => {
+		load(config.restUrl);
+	});
+
+	async function load(url: string) {
+		const result = await useApi(url);
+		result.forEach((item) => {
+			item.name = item.username;
+			item.path = `${route.path}/${item.id}`;
+		});
+		data.value = result;
+	}
+
+	async function onDelete(item) {
+		const result = await useApi(config.restUrl, { method: 'DELETE', body: { id: item.id } });
+		if (result?.status === 'OK') {
+			load(config.restUrl);
+		}
+	}
 </script>
 
 <template>
-	<div>profile</div>
+	<div>
+		<List :config="config" :data="data" @delete="onDelete" />
+	</div>
 </template>

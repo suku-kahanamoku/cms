@@ -17,7 +17,7 @@
 	import RadioField from '@/components/form/field/RadioField.vue';
 
 	const props = defineProps<{
-		config:
+		field:
 			| IFormField
 			| IFormFieldNumber
 			| IFormFieldTextarea
@@ -31,14 +31,14 @@
 <template>
 	<!-- todo - je to urcene jen pro frontend, pac select field dela neplechu pri navigaci -->
 	<client-only>
-		<TextareaField v-if="config.type === 'textarea'" :config="(config as IFormFieldTextarea)" :value="value" />
-		<SelectField v-else-if="config.type === 'select'" :config="(config as IFormFieldSelect)" :value="value" />
-		<SearchField v-else-if="config.type === 'search'" :config="(config as IFormFieldSelect)" :value="value" />
-		<CheckboxField v-else-if="config.type === 'checkbox'" :config="(config as IFormFieldRadio)" :value="value" />
-		<RadioField v-else-if="config.type === 'radio'" :config="(config as IFormFieldRadio)" :value="value" />
-		<template v-else-if="config.type === 'group'">
-			<Field v-for="childConfig in (config as any).options" :config="childConfig" :value="value" />
+		<TextareaField v-if="field.type === 'textarea'" :field="(field as IFormFieldTextarea)" :value="value" />
+		<SelectField v-else-if="field.type === 'select'" :field="(field as IFormFieldSelect)" :value="value" />
+		<SearchField v-else-if="field.type === 'search'" :field="(field as IFormFieldSelect)" :value="value" />
+		<CheckboxField v-else-if="field.type === 'checkbox'" :field="(field as IFormFieldRadio)" :value="value" />
+		<RadioField v-else-if="field.type === 'radio'" :field="(field as IFormFieldRadio)" :value="value" />
+		<template v-else-if="field.type === 'group'">
+			<Field v-for="childfield in (field as any).options" :field="childfield" :value="value" />
 		</template>
-		<TextField v-else :config="config" :value="value" />
+		<TextField v-else :field="field" :value="value" />
 	</client-only>
 </template>

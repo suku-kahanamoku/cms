@@ -9,7 +9,7 @@
 	}>();
 
 	const emits = defineEmits(['delete']);
-	const switchValue = ref();
+	const switchValue = ref(props.config.theme === 'table');
 </script>
 
 <template>
@@ -20,7 +20,7 @@
 		</v-row>
 		<v-row v-else>
 			<v-col v-for="item in data" cols="12" sm="6" md="4" lg="3">
-				<ProfileCard v-if="item.ctype === 'profile'" :data="item" @delete="emits('delete', $event)" />
+				<ProfileCard v-if="config.ctype === 'profile'" :data="item" @delete="emits('delete', $event)" />
 				<DefaultCard v-else :data="item" @delete="emits('delete', $event)" />
 			</v-col>
 		</v-row>

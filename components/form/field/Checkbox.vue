@@ -5,7 +5,7 @@
 	import { IS_DEFINED } from '@/utils/check.functions';
 
 	const props = defineProps<{
-		config: IFormFieldRadio;
+		field: IFormFieldRadio;
 		value?: any;
 	}>();
 
@@ -15,12 +15,12 @@
 
 	onMounted(() => {
 		// inicializuje regex
-		if (props.config?.validation?.pattern) {
-			rule.value = new RegExp(props.config.validation.pattern);
+		if (props.field?.validation?.pattern) {
+			rule.value = new RegExp(props.field.validation.pattern);
 		}
 		// nastavi defaultni hodnotu
-		if (IS_DEFINED(props.config.value)) {
-			fieldValue.value = props.config.value;
+		if (IS_DEFINED(props.field.value)) {
+			fieldValue.value = props.field.value;
 		}
 	});
 
@@ -34,26 +34,26 @@
 	<v-checkbox
 		ref="el"
 		v-model="fieldValue"
-		:name="config.name"
-		:label="$t(config.label || 'empty') + (config.required ? ' *' : '')"
-		:disabled="config.disabled"
-		:readonly="config.readonly"
-		:density="((config.density || 'comfortable') as any)"
-		:variant="((config.variant || 'outlined') as any)"
+		:name="field.name"
+		:label="$t(field.label || 'empty') + (field.required ? ' *' : '')"
+		:disabled="field.disabled"
+		:readonly="field.readonly"
+		:density="((field.density || 'comfortable') as any)"
+		:variant="((field.variant || 'outlined') as any)"
 		:prepend-icon="
-			config.icon?.variant !== 'inner' && config.icon?.position !== 'append' ? config.icon?.value : undefined
+			field.icon?.variant !== 'inner' && field.icon?.position !== 'append' ? field.icon?.value : undefined
 		"
 		:append-icon="
-			config.icon?.variant !== 'inner' && config.icon?.position === 'append' ? config.icon.value : undefined
+			field.icon?.variant !== 'inner' && field.icon?.position === 'append' ? field.icon.value : undefined
 		"
 		:prepend-inner-icon="
-			config.icon?.variant === 'inner' && config.icon?.position !== 'append' ? config.icon?.value : undefined
+			field.icon?.variant === 'inner' && field.icon?.position !== 'append' ? field.icon?.value : undefined
 		"
 		:append-inner-icon="
-			config.icon?.variant === 'inner' && config.icon?.position === 'append' ? config.icon.value : undefined
+			field.icon?.variant === 'inner' && field.icon?.position === 'append' ? field.icon.value : undefined
 		"
-		:rules="[(value) => (!value && config.required ? '' : true)]"
-		:multiple="config.multiple"
-		:inline="config.inline"
+		:rules="[(value) => (!value && field.required ? '' : true)]"
+		:multiple="field.multiple"
+		:inline="field.inline"
 	/>
 </template>

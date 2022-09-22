@@ -5,7 +5,7 @@
 	import { IS_DEFINED } from '@/utils/check.functions';
 
 	const props = defineProps<{
-		config: IFormFieldSelect;
+		field: IFormFieldSelect;
 		value?: any;
 	}>();
 
@@ -15,15 +15,15 @@
 
 	onMounted(() => {
 		// inicializuje regex
-		if (props.config?.validation?.pattern) {
-			rule.value = new RegExp(props.config.validation.pattern);
+		if (props.field?.validation?.pattern) {
+			rule.value = new RegExp(props.field.validation.pattern);
 		}
 		// nastavi defaultni hodnotu
-		if (IS_DEFINED(props.config.value)) {
-			fieldValue.value = props.config.value;
+		if (IS_DEFINED(props.field.value)) {
+			fieldValue.value = props.field.value;
 		}
 		// nacte options
-		loadOptions(props.config.restOptions);
+		loadOptions(props.field.restOptions);
 	});
 
 	watch(
@@ -36,7 +36,7 @@
 	async function loadOptions(restOptions?: any): Promise<void> {
 		if (restOptions?.url) {
 			const options = await useApi(restOptions.url);
-			props.config.options = options.map((option) => ({
+			props.field.options = options.map((option) => ({
 				value: option[restOptions.value],
 				label: option[restOptions.label],
 				item: option,
@@ -46,31 +46,31 @@
 </script>
 
 <template>
-	<input ref="el" type="hidden" :name="config.name" :multiple="config.multiple" />
+	<input ref="el" type="hidden" :name="field.name" :multiple="field.multiple" />
 	<v-autocomplete
 		v-model="fieldValue"
-		:id="config.name"
-		:label="$t(config.label || 'empty') + (config.required ? ' *' : '')"
-		:disabled="config.disabled"
-		:readonly="config.readonly"
-		:density="((config.density || 'comfortable') as any)"
-		:variant="((config.variant || 'outlined') as any)"
+		:id="field.name"
+		:label="$t(field.label || 'empty') + (field.required ? ' *' : '')"
+		:disabled="field.disabled"
+		:readonly="field.readonly"
+		:density="((field.density || 'comfortable') as any)"
+		:variant="((field.variant || 'outlined') as any)"
 		:prepend-icon="
-			config.icon?.variant !== 'inner' && config.icon?.position !== 'append' ? config.icon?.value : undefined
+			field.icon?.variant !== 'inner' && field.icon?.position !== 'append' ? field.icon?.value : undefined
 		"
 		:append-icon="
-			config.icon?.variant !== 'inner' && config.icon?.position === 'append' ? config.icon.value : undefined
+			field.icon?.variant !== 'inner' && field.icon?.position === 'append' ? field.icon.value : undefined
 		"
 		:prepend-inner-icon="
-			config.icon?.variant === 'inner' && config.icon?.position !== 'append' ? config.icon?.value : undefined
+			field.icon?.variant === 'inner' && field.icon?.position !== 'append' ? field.icon?.value : undefined
 		"
 		:append-inner-icon="
-			config.icon?.variant === 'inner' && config.icon?.position === 'append' ? config.icon.value : undefined
+			field.icon?.variant === 'inner' && field.icon?.position === 'append' ? field.icon.value : undefined
 		"
-		:rules="[(value) => (!value && config.required ? '' : true)]"
-		:chips="config.chips === false ? false : true"
-		:multiple="config.multiple"
-		:items="config.options"
+		:rules="[(value) => (!value && field.required ? '' : true)]"
+		:chips="field.chips === false ? false : true"
+		:multiple="field.multiple"
+		:items="field.options"
 		:item-title="(item) => $t(item.label || 'empty')"
 		item-value="value"
 	/>

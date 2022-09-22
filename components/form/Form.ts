@@ -26,6 +26,13 @@ export default class Form {
 	public item = ref();
 
 	/**
+	 *
+	 *
+	 * @memberof Form
+	 */
+	public loading = ref();
+
+	/**
 	 * Creates an instance of Form.
 	 *
 	 * @param {*} config
@@ -84,6 +91,7 @@ export default class Form {
 	 * @memberof Form
 	 */
 	public async load(url?: string, data?: any): Promise<void> {
+		this.loading.value = true;
 		try {
 			if (url) {
 				data = await useApi(url);
@@ -107,24 +115,21 @@ export default class Form {
 			console.error(error);
 			useToast({ type: 'error', message: 'message.load_error' });
 		}
+		setTimeout(() => {
+			this.loading.value = false;
+		}, 400);
 	}
 
 	/**
 	 * Odesle formular
 	 *
 	 * @param {*} form
-	 * @param {*} loading
-	 * @returns {*}  {Promise<void>}
+	 * @param {string} method
+	 * @returns {*}  {Promise<any>}
 	 * @memberof Form
 	 */
-	public async onSubmit(form, loading, method: string): Promise<any> {
-		return await this._submit(
-			RESOLVE_MARKS(this.config.submitUrl, this),
-			form,
-			this.config.fields,
-			loading,
-			method
-		);
+	public async onSubmit(form, method: string): Promise<any> {
+		return await this._submit(RESOLVE_MARKS(this.config.submitUrl, this), form, this.config.fields, method);
 	}
 
 	/**
@@ -139,10 +144,7 @@ export default class Form {
 	 * @returns {*}  {Promise<any>}
 	 * @memberof Form
 	 */
-	protected async _submit(url: string, vForm?, fields?, loading?, method = 'POST'): Promise<any> {
-		if (loading) {
-			loading.value = true;
-		}
+	protected async _submit(url: string, vForm?, fields?, method = 'POST'): Promise<any> {
 		let result;
 		try {
 			const validation = vForm?.value?.validate ? await vForm?.value?.validate() : null;
@@ -154,6 +156,7 @@ export default class Form {
 					result = this._getUrlParams(url, vForm, fields);
 				} else {
 					options.body = this._getRestFields(vForm, fields);
+					this.loading.value = true;
 					result = await useApi(url, options).catch((error) => {
 						throw new Error(error);
 					});
@@ -163,6 +166,7 @@ export default class Form {
 			else if (method === 'DELETE') {
 				options.body = vForm;
 				options.all = true;
+				this.loading.value = true;
 				result = await useApi(url, options).catch((error) => {
 					throw new Error(error);
 				});
@@ -171,9 +175,9 @@ export default class Form {
 			console.error(error);
 			useToast({ type: 'error', message: `form.${method.toLocaleLowerCase()}_error` });
 		}
-		if (loading) {
-			loading.value = false;
-		}
+		setTimeout(() => {
+			this.loading.value = false;
+		}, 400);
 		return result;
 	}
 

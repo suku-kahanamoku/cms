@@ -2,7 +2,6 @@ import KeycloakAdminClient from '@keycloak/keycloak-admin-client';
 import jwt_decode from 'jwt-decode';
 
 import init from '../keycloak.json';
-import { SET_TOKEN } from './firestore';
 
 export const keycloak = new KeycloakAdminClient(init);
 
@@ -67,4 +66,16 @@ export async function AUTH_CHECK(event, roleGroup: string, role: string): Promis
 		}
 	}
 	return result;
+}
+
+export async function SET_TOKEN(event, token: string, userId?: string) {
+	if (token) {
+		setCookie(event, 'x-acc-token', token);
+		setCookie(event, 'x-ref-token', token);
+		setCookie(event, 'user-id', userId);
+	} else {
+		deleteCookie(event, 'x-acc-token');
+		deleteCookie(event, 'x-ref-token');
+		deleteCookie(event, 'user-id');
+	}
 }

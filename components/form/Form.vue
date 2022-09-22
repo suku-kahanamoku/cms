@@ -1,7 +1,6 @@
 <script setup lang="ts">
 	import Field from '@/components/form/field/Field.vue';
 	import Form from '@/components/form/Form';
-	import List from '@/components/list/List.vue';
 
 	const props = defineProps<{
 		config: any;
@@ -9,39 +8,31 @@
 	}>();
 
 	const emits = defineEmits(['load', 'select', 'submit']);
-	const FormControler = new Form(props.config);
+	const FormController = new Form(props.config);
 	const form = ref();
-	const loading = ref(false);
 	const panels = ref([0]);
 
 	watch(
 		() => props.data,
-		(data) => FormControler.load(null, data)
+		(data) => FormController.load(null, data)
 	);
-	watch(FormControler.items, (items) => emits('load', items));
-	watch(FormControler.item, (item) => {
+	watch(FormController.items, (items) => emits('load', items));
+	watch(FormController.item, (item) => {
 		props.config?.fields?.forEach((field) => (field.value = item[field.name]));
 		emits('select', item);
 	});
 
 	async function onSubmit() {
-		const result = await FormControler.onSubmit(form, loading, props.config.method);
+		const result = await FormController.onSubmit(form, props.config.method);
 		if (props.config.method === 'GET') {
 			emits('submit', props.config?.syscode + '=' + result);
 		} else {
 			emits('submit', result);
 		}
 	}
-
-	async function onDelete(e) {
-		const result = await FormControler.onSubmit(e, loading, 'DELETE');
-		if (result?.status === 'OK') {
-			FormControler.process();
-		}
-	}
 </script>
 <template>
-	<v-progress-linear v-if="loading" indeterminate></v-progress-linear>
+	<v-progress-linear v-if="FormController.loading.value" indeterminate></v-progress-linear>
 
 	<v-form ref="form" @submit.prevent="onSubmit">
 		<v-expansion-panels v-if="config?.theme === 'accordion'" v-model="panels">
@@ -58,12 +49,17 @@
 							:md="field.cols?.md"
 							:lg="field.cols?.lg"
 						>
-							<Field :config="field" :value="field.value" />
+							<Field :field="field" :value="FormController.loading.value === false && field.value" />
 						</v-col>
 					</v-row>
 					<v-row>
 						<v-spacer></v-spacer>
-						<v-btn color="primary" type="submit" :loading="loading" :disabled="!config?.submitUrl">
+						<v-btn
+							color="primary"
+							type="submit"
+							:loading="FormController.loading.value"
+							:disabled="!config?.submitUrl"
+						>
 							{{ $t('btn.send') }}
 						</v-btn>
 					</v-row>
@@ -84,13 +80,18 @@
 						:md="field.cols?.md"
 						:lg="field.cols?.lg"
 					>
-						<Field :config="field" :value="field.value" />
+						<Field :field="field" :value="FormController.loading.value === false && field.value" />
 					</v-col>
 				</v-row>
 			</v-card-text>
 			<v-card-actions>
 				<v-spacer></v-spacer>
-				<v-btn color="primary" type="submit" :loading="loading" :disabled="!config?.submitUrl">
+				<v-btn
+					color="primary"
+					type="submit"
+					:loading="FormController.loading.value"
+					:disabled="!config?.submitUrl"
+				>
 					{{ $t('btn.send') }}
 				</v-btn>
 			</v-card-actions>
@@ -104,17 +105,8 @@
 				:md="field.cols?.md"
 				:lg="field.cols?.lg"
 			>
-				<Field :config="field" :value="field.value" />
+				<Field :field="field" :value="FormController.loading.value === false && field.value" />
 			</v-col>
 		</v-row>
 	</v-form>
-
-	<div class="mt-9">
-		<List
-			v-if="!FormControler.route.params.id?.length && FormControler?.items?.value"
-			:config="config"
-			:data="FormControler.items.value"
-			@delete="onDelete"
-		/>
-	</div>
 </template>

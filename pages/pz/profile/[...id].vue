@@ -12,23 +12,23 @@
 		},
 	});
 
-	const data = ref();
+	const item = ref();
 	const tab = ref();
 </script>
 
 <template>
 	<div>
 		<v-tabs v-model="tab" background-color="primary">
-			<v-tab value="form">{{ $t('') }}</v-tab>
-			<v-tab value="json">{{ $t('') }}</v-tab>
+			<v-tab value="form">{{ $t('info.form') }}</v-tab>
+			<v-tab value="json">{{ $t('info.json') }}</v-tab>
 		</v-tabs>
 
 		<v-window v-model="tab">
 			<v-window-item value="form">
-				<Form :config="config" :data="data" @load="data = $event" @submit="data = [$event]" />
+				<Form :config="config" @select="item = $event" @submit="item = $event" />
 			</v-window-item>
-			<v-window-item value="form">
-				<JsonForm :config="configJson" :data="data[0]" @submit="data = [$event]" />
+			<v-window-item value="json">
+				<JsonForm :config="configJson" :data="item" @submit="item = $event" />
 			</v-window-item>
 		</v-window>
 	</div>

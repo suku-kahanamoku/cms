@@ -7,7 +7,7 @@
     "submitUrl": "/api/profile?where={\"id\":\"${route.params.id.0}\"}",
     "fields": [
         {
-            "name": "firstname",
+            "name": "firstName",
             "label": "form.firstname",
             "required": true,
             "autocomplete": "given-name",
@@ -18,7 +18,7 @@
             }
         },
         {
-            "name": "lastname",
+            "name": "lastName",
             "label": "form.lastname",
             "required": true,
             "autocomplete": "family-name",

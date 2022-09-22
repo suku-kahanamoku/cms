@@ -21,9 +21,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 		.then((auth) => {
 			if (!auth) {
 				/*kc.login();*/
-				setTimeout(() => {
-					navigateTo('/login');
-				}, 400);
+				
 			}
 		})
 		.catch(() => {

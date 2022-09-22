@@ -1,0 +1,32 @@
+{
+    "title": "btn.search",
+    "restUrl": "/api/profile",
+    "cols": [
+        {
+            "label": "form.name",
+            "value": "name"
+        },
+        {
+            "label": "form.email",
+            "value": "email"
+        },
+        {
+            "label": "form.firstname",
+            "value": "firstName"
+        },
+        {
+            "label": "form.lastname",
+            "value": "lastName"
+        },
+        {
+            "label": "form.phone",
+            "value": "phone"
+        },
+        {
+            "label": "",
+            "value": "action"
+        }
+    ],
+    "ctype": "profile",
+    "theme": "table"
+}

@@ -1,5 +1,5 @@
 {
-    "title": "info.json",
+    "title": "route.profile",
     "color": "primary",
     "method": "PATCH",
     "restUrl": "",

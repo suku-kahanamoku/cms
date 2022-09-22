@@ -25,6 +25,7 @@
 						{{ col.value === 'title' || col.value === 'name' ? $t(item[col.value]) : item[col.value] }}
 					</v-btn>
 					<template v-else-if="col.value === 'action'">
+						<v-btn :to="item?.path" size="x-small" icon="mdi-account-edit" color="primary" />
 						<ConfirmDialog @confirm="$event && emits('delete', item)">
 							<template v-slot:btn>
 								<v-btn size="x-small" icon="mdi-delete" color="error" />

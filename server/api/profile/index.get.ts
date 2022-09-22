@@ -9,10 +9,7 @@ export default defineEventHandler(async (event) => {
 			result: result,
 		};
 	} catch (error) {
-		const data =
-			error.statusCode === 500
-				? { statusCode: 404, statusMessage: 'message.not_found', message: 'message.not_found', error: error }
-				: error;
+		const data = { statusCode: 404, message: 'message.not_found', error: error };
 		event.res.statusCode = data.statusCode;
 		return data;
 	}
