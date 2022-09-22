@@ -1,4 +1,4 @@
-import { GET_PROFILES } from '~~/server/lib/keycloak';
+import { GET_PROFILES } from '@/server/lib/keycloak';
 
 export default defineEventHandler(async (event) => {
 	try {

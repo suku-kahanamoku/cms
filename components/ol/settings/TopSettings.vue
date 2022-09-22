@@ -1,8 +1,8 @@
 <script setup lang="ts">
 	import { onMounted, onUnmounted, reactive, ref, type Ref } from 'vue';
 
-	import Field from '@/core/form/field/Field.vue';
-	import type { IFormFieldRadio } from '@/core/form/field/field.interface';
+	import Field from '@/components/form/field/Field.vue';
+	import type { IFormFieldRadio } from '@/components/form/field/field.interface';
 
 	let timer: NodeJS.Timer;
 

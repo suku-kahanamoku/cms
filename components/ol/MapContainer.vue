@@ -5,9 +5,9 @@
 	import type Style from 'ol/style/Style';
 	import 'ol/ol.css';
 
-	import { OlService } from './ol.service';
+	import { OlService } from '@/components/ol/ol.service';
 	import Area from '@/components/ol/Area.vue';
-	import type { IArea, IDraggableResizable } from './ol.interface';
+	import type { IArea, IDraggableResizable } from '@/components/ol/ol.interface';
 	import * as data from '@/assets/data/cityspaces.json';
 
 	const props = defineProps<{

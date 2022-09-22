@@ -1,9 +1,12 @@
 <script setup lang="ts">
-	import Form from '@/core/form/Form.vue';
+	import Form from '@/components/form/Form.vue';
 
 	definePageMeta({
 		title: 'route.contact',
 		pos: 3,
+		icon: {
+			value: 'mdi-email',
+		},
 	});
 </script>
 <template>

@@ -2,7 +2,7 @@
 	import { ref } from 'vue';
 	import VueDraggableResizable from 'vue-draggable-resizable/src/components/vue-draggable-resizable.vue';
 
-	import type { IDraggableResizable } from './ol.interface';
+	import type { IDraggableResizable } from '@/components/ol/ol.interface';
 
 	const props = defineProps<{
 		config?: IDraggableResizable | any;

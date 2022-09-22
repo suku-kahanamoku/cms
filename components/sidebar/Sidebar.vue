@@ -1,10 +1,9 @@
 <script setup lang="ts">
 	import { ref } from 'vue';
 
-	import TreeItem from '@/core/tree/TreeItem.vue';
+	import TreeItem from '@/components/tree/TreeItem.vue';
 
 	const routes: any = useState('routes');
-	console.log(routes);
 </script>
 
 <template>
@@ -34,8 +33,8 @@
 							v-else
 							:value="route.name"
 							:title="$t(route.meta.title || 'empty')"
-							:prepend-icon="route.icon?.pos !== 'after' && route.icon?.value"
-							:after-icon="route.icon?.pos === 'after' && route.icon?.value"
+							:prepend-icon="route.meta?.icon?.pos !== 'after' && route.meta?.icon?.value"
+							:after-icon="route.meta?.icon?.pos === 'after' && route.meta?.icon?.value"
 						></v-list-item>
 					</template>
 				</template>

@@ -16,6 +16,10 @@
             "validation": {
                 "msg": "form.msg.wrong_email",
                 "pattern": "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+            },
+            "cols": {
+                "xs": 12,
+                "sm": 6
             }
         },
         {
@@ -23,7 +27,11 @@
             "name": "password",
             "label": "form.password",
             "required": true,
-            "autocomplete": "current-password"
+            "autocomplete": "current-password",
+            "cols": {
+                "xs": 12,
+                "sm": 6
+            }
         }
     ]
 }

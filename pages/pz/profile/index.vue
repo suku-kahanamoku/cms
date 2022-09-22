@@ -1,16 +1,17 @@
 <script setup lang="ts">
-	import Form from '@/core/form/Form.vue';
-	import { GET_MARK } from '@/core/utils/modify-string.functions';
-	import { IS_OBJECT } from '@/core/utils/check.functions';
+	import Form from '@/components/form/Form.vue';
+	import { GET_MARK } from '@/utils/modify-string.functions';
+	import { IS_OBJECT } from '@/utils/check.functions';
 
 	definePageMeta({
 		syscode: 'profile',
-		title: 'route.profile'
+		title: 'route.profile',
+		icon: {
+			value: 'mdi-account',
+		},
 	});
 </script>
 
 <template>
-	<div>
-		profile
-	</div>
+	<div>profile</div>
 </template>

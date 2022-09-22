@@ -1,11 +1,11 @@
 <script setup lang="ts">
 	import { ref } from 'vue';
 
-	import { IFormFieldSelect } from '@/core/form/field/field.interface';
-	import { IS_DEFINED } from '@/core/utils/check.functions';
+	import { IFormFieldRadio } from '@/components/form/field/field.interface';
+	import { IS_DEFINED } from '@/utils/check.functions';
 
 	const props = defineProps<{
-		config: IFormFieldSelect;
+		config: IFormFieldRadio;
 		value?: any;
 	}>();
 
@@ -22,32 +22,18 @@
 		if (IS_DEFINED(props.config.value)) {
 			fieldValue.value = props.config.value;
 		}
-		// nacte options
-		loadOptions(props.config.restOptions);
 	});
 
 	watch(
 		() => props.value,
 		(value) => (fieldValue.value = value)
 	);
-
-	async function loadOptions(restOptions?: any): Promise<void> {
-		if (restOptions?.url) {
-			const options = await useApi(restOptions.url);
-			props.config.options = options.map((option) => ({
-				value: option[restOptions.value],
-				label: option[restOptions.label],
-				item: option,
-			}));
-		}
-	}
 </script>
 
 <template>
-	<v-select
+	<v-checkbox
 		ref="el"
 		v-model="fieldValue"
-		:id="config.name"
 		:name="config.name"
 		:label="$t(config.label || 'empty') + (config.required ? ' *' : '')"
 		:disabled="config.disabled"
@@ -67,10 +53,7 @@
 			config.icon?.variant === 'inner' && config.icon?.position === 'append' ? config.icon.value : undefined
 		"
 		:rules="[(value) => (!value && config.required ? '' : true)]"
-		:chips="config.chips === false ? false : true"
 		:multiple="config.multiple"
-		:items="config.options"
-		:item-title="(item) => $t(item.label || 'empty')"
-		item-value="value"
+		:inline="config.inline"
 	/>
 </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 	import DefaultCard from '@/components/card/DefaultCard.vue';
-	import DefaultTable from './table/DefaultTable.vue';
-	import ProfileCard from './card/ProfileCard.vue';
+	import DefaultTable from '@/components/table/DefaultTable.vue';
+	import ProfileCard from '@/components/card/ProfileCard.vue';
 
 	const props = defineProps<{
 		config: any;

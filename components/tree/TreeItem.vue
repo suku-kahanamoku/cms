@@ -11,8 +11,8 @@
 				rounded="lg"
 				class="mb-1"
 				:title="$t(data.meta.title || 'empty')"
-				:prepend-icon="data.icon?.pos !== 'after' && data.icon?.value"
-				:after-icon="data.icon?.pos === 'after' && data.icon?.value"
+				:prepend-icon="data.meta?.icon?.pos !== 'after' && data.meta?.icon?.value"
+				:after-icon="data.meta?.icon?.pos === 'after' && data.meta?.icon?.value"
 			></v-list-item>
 		</template>
 
@@ -25,8 +25,8 @@
 					rounded="lg"
 					class="mb-1 pl-1"
 					:title="$t(child.meta.title || 'empty')"
-					:prepend-icon="child.icon?.pos !== 'after' && child.icon?.value"
-					:after-icon="child.icon?.pos === 'after' && child.icon?.value"
+					:prepend-icon="child.meta?.icon?.pos !== 'after' && child.meta?.icon?.value"
+					:after-icon="child.meta?.icon?.pos === 'after' && child.meta?.icon?.value"
 				></v-list-item>
 			</template>
 		</template>

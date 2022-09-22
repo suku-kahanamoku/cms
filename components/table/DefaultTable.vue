@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	import ConfirmDialog from '@/core/dialog/ConfirmDialog.vue';
+	import ConfirmDialog from '@/components/dialog/ConfirmDialog.vue';
 
 	const props = defineProps<{
 		data: any;

@@ -1,5 +1,5 @@
-import { IS_DEFINED, IS_OBJECT } from './check.functions';
-import { TRIM } from './modify-string.functions';
+import { IS_DEFINED, IS_OBJECT } from '@/utils/check.functions';
+import { TRIM } from '@/utils/modify-string.functions';
 
 /**
  * Dany objekt prevede na string

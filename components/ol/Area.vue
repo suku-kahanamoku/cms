@@ -6,8 +6,8 @@
 
 	import DraggableResizable from '@/components/ol/DraggableResizable.vue';
 	import area from '@turf/area';
-	import { IArea } from './ol.interface';
-	import Form from '@/core/form/Form.vue';
+	import { IArea } from '@/components/ol/ol.interface';
+	import Form from '@/components/form/Form.vue';
 
 	const props = defineProps<{
 		config: any;

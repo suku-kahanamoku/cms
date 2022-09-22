@@ -1,4 +1,4 @@
-import { IS_DEFINED } from '@/core/utils/check.functions';
+import { IS_DEFINED } from '@/utils/check.functions';
 
 export default function (name, value) {
 	const store = useState(name);

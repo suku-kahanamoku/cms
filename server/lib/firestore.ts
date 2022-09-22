@@ -2,9 +2,9 @@ import admin from 'firebase-admin';
 import { DecodedIdToken, getAuth } from 'firebase-admin/auth';
 
 import { db, apiKey } from './firebase';
-import { ITERATE } from '@/core/utils/modify-object.function';
-import { IS_OBJECT } from '@/core/utils/check.functions';
-import { REMOVE_LAST_STRING } from '~~/core/utils/modify-string.functions';
+import { ITERATE } from '@/utils/modify-object.function';
+import { IS_OBJECT } from '@/utils/check.functions';
+import { REMOVE_LAST_STRING } from '@/utils/modify-string.functions';
 
 /**
  * Nacte a vrati data z dane kolekce

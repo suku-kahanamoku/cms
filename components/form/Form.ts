@@ -1,7 +1,7 @@
-import { IS_NUMERIC, IS_DEFINED, IS_OBJECT } from '@/core/utils/check.functions';
-import { ITERATE } from '@/core/utils/modify-object.function';
-import { GET_MARK, RESOLVE_MARKS, TRIM } from '@/core/utils/modify-string.functions';
-import { IFormField } from '~~/core/form/field/field.interface';
+import { IS_NUMERIC, IS_DEFINED, IS_OBJECT } from '@/utils/check.functions';
+import { ITERATE } from '@/utils/modify-object.function';
+import { GET_MARK, RESOLVE_MARKS, TRIM } from '@/utils/modify-string.functions';
+import { IFormField } from '@/components/form/field/field.interface';
 
 export default class Form {
 	/**

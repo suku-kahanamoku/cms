@@ -1,4 +1,4 @@
-import useToast from './useToast';
+import useToast from '@/composables/useToast';
 
 export default async function (url: string, options?: any): Promise<any> {
 	if (url) {

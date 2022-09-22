@@ -1,6 +1,6 @@
 <script setup lang="ts">
-	import FormController from '~~/core/form/Form';
-	import { CLONE, ITERATE } from '../utils/modify-object.function';
+	import FormController from '@/components/form/Form';
+	import { CLONE, ITERATE } from '@/utils/modify-object.function';
 	import VueJsoneditor from 'vue3-ts-jsoneditor';
 
 	const props = defineProps<{

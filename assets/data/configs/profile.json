@@ -11,13 +11,21 @@
             "label": "form.firstname",
             "required": true,
             "autocomplete": "given-name",
-            "autofocus": true
+            "autofocus": true,
+            "cols": {
+                "xs": 12,
+                "sm": 6
+            }
         },
         {
             "name": "lastname",
             "label": "form.lastname",
             "required": true,
-            "autocomplete": "family-name"
+            "autocomplete": "family-name",
+            "cols": {
+                "xs": 12,
+                "sm": 6
+            }
         },
         {
             "type": "email",
@@ -25,17 +33,24 @@
             "label": "form.email",
             "required": true,
             "autocomplete": "email",
-            "autofocus": true,
             "validation": {
                 "msg": "form.msg.wrong_email",
                 "pattern": "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
+            },
+            "cols": {
+                "xs": 12,
+                "sm": 6
             }
         },
         {
             "type": "tel",
             "name": "phone",
             "label": "form.phone",
-            "autocomplete": "tel"
+            "autocomplete": "tel",
+            "cols": {
+                "xs": 12,
+                "sm": 6
+            }
         }
     ]
 }

@@ -13,8 +13,8 @@ import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
 import Style from 'ol/style/Style';
 
-import { ITERATE } from '@/core/utils/modify-object.function';
-import { IDraggableResizable } from './ol.interface';
+import { ITERATE } from '@/utils/modify-object.function';
+import { IDraggableResizable } from '@/components/ol/ol.interface';
 
 export class OlService {
 	/**

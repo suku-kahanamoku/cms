@@ -1,10 +1,13 @@
 <script setup lang="ts">
-	import Form from '@/core/form/Form.vue';
+	import Form from '@/components/form/Form.vue';
 	import config from '@/assets/data/configs/reset_pass.json';
 
 	definePageMeta({
 		title: 'route.reset_pass',
 		visible: false,
+		icon: {
+			value: 'mdi-key',
+		},
 	});
 
 	function onSubmit(e): void {}

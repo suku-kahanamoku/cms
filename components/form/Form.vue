@@ -1,6 +1,6 @@
 <script setup lang="ts">
-	import Field from '@/core/form/field/Field.vue';
-	import Form from '~~/core/form/Form';
+	import Field from '@/components/form/field/Field.vue';
+	import Form from '@/components/form/Form';
 	import List from '@/components/List.vue';
 
 	const props = defineProps<{
@@ -42,7 +42,7 @@
 </script>
 <template>
 	<v-progress-linear v-if="loading" indeterminate></v-progress-linear>
-	
+
 	<v-form ref="form" @submit.prevent="onSubmit">
 		<v-expansion-panels v-if="config?.theme === 'accordion'" v-model="panels">
 			<v-expansion-panel>
@@ -51,7 +51,13 @@
 				</v-expansion-panel-title>
 				<v-expansion-panel-text class="py-5">
 					<v-row>
-						<v-col v-for="field in config?.fields" cols="12" sm="6">
+						<v-col
+							v-for="field in config?.fields"
+							:cols="field.cols?.xs"
+							:sm="field.cols?.sm"
+							:md="field.cols?.md"
+							:lg="field.cols?.lg"
+						>
 							<Field :config="field" :value="field.value" />
 						</v-col>
 					</v-row>
@@ -71,7 +77,13 @@
 			</v-toolbar>
 			<v-card-text>
 				<v-row>
-					<v-col v-for="field in config?.fields" cols="12" sm="6">
+					<v-col
+						v-for="field in config?.fields"
+						:cols="field.cols?.xs"
+						:sm="field.cols?.sm"
+						:md="field.cols?.md"
+						:lg="field.cols?.lg"
+					>
 						<Field :config="field" :value="field.value" />
 					</v-col>
 				</v-row>
@@ -85,7 +97,13 @@
 		</v-card>
 
 		<v-row v-else>
-			<v-col v-for="field in config?.fields" cols="12" sm="6">
+			<v-col
+				v-for="field in config?.fields"
+				:cols="field.cols?.xs"
+				:sm="field.cols?.sm"
+				:md="field.cols?.md"
+				:lg="field.cols?.lg"
+			>
 				<Field :config="field" :value="field.value" />
 			</v-col>
 		</v-row>

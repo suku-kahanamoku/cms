@@ -1,12 +1,15 @@
 <script setup lang="ts">
-	import Form from '@/core/form/Form.vue';
-	import JsonForm from '@/core/form/JsonForm.vue';
+	import Form from '@/components/form/Form.vue';
+	import JsonForm from '@/components/form/JsonForm.vue';
 	import config from '@/assets/data/configs/profile.json';
 	import configJson from '@/assets/data/configs/profile_json.json';
 
 	definePageMeta({
 		title: 'route.profile_detail',
 		visible: false,
+		icon: {
+			value: 'mdi-cog',
+		},
 	});
 
 	const data = ref();

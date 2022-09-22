@@ -7,7 +7,10 @@
 
 	definePageMeta({
 		title: 'route.radar',
-		pos: 2
+		pos: 2,
+		icon: {
+			value: 'mdi-radar',
+		},
 	});
 
 	provide('OlService', new OlService());

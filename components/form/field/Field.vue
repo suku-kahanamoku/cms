@@ -8,13 +8,13 @@
 		IFormFieldSelect,
 		IFormFieldRadio,
 		IFormFieldDatetime,
-	} from '@/core/form/field/field.interface';
-	import TextField from '@/core/form/field/TextField.vue';
-	import TextareaField from '@/core/form/field/TextareaField.vue';
-	import SelectField from '@/core/form/field/SelectField.vue';
-	import SearchField from '@/core/form/field/SearchField.vue';
-	import CheckboxField from '@/core/form/field/Checkbox.vue';
-	import RadioField from '@/core/form/field/RadioField.vue';
+	} from '@/components/form/field/field.interface';
+	import TextField from '@/components/form/field/TextField.vue';
+	import TextareaField from '@/components/form/field/TextareaField.vue';
+	import SelectField from '@/components/form/field/SelectField.vue';
+	import SearchField from '@/components/form/field/SearchField.vue';
+	import CheckboxField from '@/components/form/field/Checkbox.vue';
+	import RadioField from '@/components/form/field/RadioField.vue';
 
 	const props = defineProps<{
 		config:
