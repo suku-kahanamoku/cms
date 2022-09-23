@@ -1,9 +1,12 @@
 import KeycloakAdminClient from '@keycloak/keycloak-admin-client';
 import jwt_decode from 'jwt-decode';
 
-import init from '../keycloak.json';
+const kcInit = JSON.parse(process.env.KEYCLOAK);
 
-export const keycloak = new KeycloakAdminClient(init);
+export const keycloak = new KeycloakAdminClient({
+	baseUrl: kcInit.url,
+	realmName: kcInit.realm,
+});
 
 export async function IS_LOGGED(event): Promise<boolean> {
 	let result = false;
@@ -23,8 +26,8 @@ export async function LOGIN(event, username: string, password: string): Promise<
 	await keycloak.auth({
 		username: username,
 		password: password,
-		grantType: init.grantType as any,
-		clientId: init.clientId,
+		grantType: 'password',
+		clientId: kcInit.clientId,
 	});
 	const data = await keycloak.whoAmI.find();
 	if (data.userId && keycloak.accessToken) {

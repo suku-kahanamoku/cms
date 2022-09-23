@@ -1,13 +1,7 @@
-import Keycloak, { KeycloakConfig, KeycloakInitOptions } from 'keycloak-js';
-
-const config: KeycloakConfig = {
-	url: 'http://localhost:8080',
-	realm: 'test',
-	clientId: 'client-test',
-};
+import Keycloak from 'keycloak-js';
 
 export default defineNuxtPlugin(async (nuxtApp) => {
-	const kc = new Keycloak(config);
+	const kc = new Keycloak(process.env.KEYCLOAK);
 	// vrati plugin
 	return {
 		provide: {
