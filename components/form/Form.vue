@@ -1,6 +1,6 @@
 <script setup lang="ts">
 	import Field from '@/components/form/field/Field.vue';
-	import Form from '@/components/form/Form';
+	import FormController from '@/components/form/formController';
 
 	const props = defineProps<{
 		config: any;
@@ -8,22 +8,22 @@
 	}>();
 
 	const emits = defineEmits(['load', 'select', 'submit']);
-	const FormController = new Form(props.config);
+	const formController = new FormController(props.config);
 	const form = ref();
 	const panels = ref([0]);
 
 	watch(
 		() => props.data,
-		(data) => FormController.load(null, data)
+		(data) => formController.load(null, data)
 	);
-	watch(FormController.items, (items) => emits('load', items));
-	watch(FormController.item, (item) => {
+	watch(formController.items, (items) => emits('load', items));
+	watch(formController.item, (item) => {
 		props.config?.fields?.forEach((field) => (field.value = item[field.name]));
 		emits('select', item);
 	});
 
 	async function onSubmit() {
-		const result = await FormController.onSubmit(form, props.config.method);
+		const result = await formController.onSubmit(form, props.config.method);
 		if (props.config.method === 'GET') {
 			emits('submit', props.config?.syscode + '=' + result);
 		} else {
@@ -32,7 +32,7 @@
 	}
 </script>
 <template>
-	<v-progress-linear v-if="FormController.loading.value" indeterminate></v-progress-linear>
+	<v-progress-linear v-if="formController.loading.value" indeterminate></v-progress-linear>
 
 	<v-form ref="form" @submit.prevent="onSubmit">
 		<v-expansion-panels v-if="config?.theme === 'accordion'" v-model="panels">
@@ -49,7 +49,7 @@
 							:md="field.cols?.md"
 							:lg="field.cols?.lg"
 						>
-							<Field :field="field" :value="FormController.loading.value === false && field.value" />
+							<Field :field="field" :value="formController.loading.value === false && field.value" />
 						</v-col>
 					</v-row>
 					<v-row>
@@ -57,7 +57,7 @@
 						<v-btn
 							color="primary"
 							type="submit"
-							:loading="FormController.loading.value"
+							:loading="formController.loading.value"
 							:disabled="!config?.submitUrl"
 						>
 							{{ $t('btn.send') }}
@@ -80,7 +80,7 @@
 						:md="field.cols?.md"
 						:lg="field.cols?.lg"
 					>
-						<Field :field="field" :value="FormController.loading.value === false && field.value" />
+						<Field :field="field" :value="formController.loading.value === false && field.value" />
 					</v-col>
 				</v-row>
 			</v-card-text>
@@ -89,7 +89,7 @@
 				<v-btn
 					color="primary"
 					type="submit"
-					:loading="FormController.loading.value"
+					:loading="formController.loading.value"
 					:disabled="!config?.submitUrl"
 				>
 					{{ $t('btn.send') }}
@@ -105,7 +105,7 @@
 				:md="field.cols?.md"
 				:lg="field.cols?.lg"
 			>
-				<Field :field="field" :value="FormController.loading.value === false && field.value" />
+				<Field :field="field" :value="formController.loading.value === false && field.value" />
 			</v-col>
 		</v-row>
 	</v-form>

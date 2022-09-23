@@ -26,7 +26,7 @@ export default class FormController {
 	public item = ref();
 
 	/**
-	 *
+	 * Priznak zda formular stahuje/odesila data
 	 *
 	 * @memberof FormController
 	 */

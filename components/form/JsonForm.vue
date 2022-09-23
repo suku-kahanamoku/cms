@@ -1,5 +1,5 @@
 <script setup lang="ts">
-	import Form from '@/components/form/Form';
+	import FormController from '@/components/form/FormController';
 	import { CLONE, ITERATE } from '@/utils/modify-object.function';
 	import VueJsoneditor from 'vue3-ts-jsoneditor';
 
@@ -9,7 +9,7 @@
 	}>();
 
 	const emits = defineEmits(['submit']);
-	const FormController = new Form(props.config);
+	const formController = new FormController(props.config);
 	const changedData = ref('');
 
 	const onError = (e) => {
@@ -37,7 +37,7 @@
 					validate: () => ({ valid: true }),
 				},
 			};
-			const result = await FormController.onSubmit(form, props.config.method);
+			const result = await formController.onSubmit(form, props.config.method);
 			emits('submit', result);
 		} catch (error) {
 			console.error(error);
@@ -66,7 +66,7 @@
 			<v-spacer></v-spacer>
 			<v-btn
 				color="primary"
-				:loading="FormController.loading.value"
+				:loading="formController.loading.value"
 				:disabled="!config.submitUrl"
 				@click="onSubmit"
 			>
