@@ -8,22 +8,42 @@
  */
 export default async function (to, from) {
 	let result: any = true;
-	if (useState('isClient')?.value) {
-		setRoutes();
-		try {
-			await useNuxtApp()
-				.$kc?.init({
-					onLoad: 'check-sso',
-					silentCheckSsoRedirectUri: window?.location?.origin + '/silent-check-sso.html',
-					checkLoginIframe: false,
-					refreshToken: useCookie('x-ref-token').value,
-					token: useCookie('x-acc-token').value,
-				})
-				.then((auth) => (result = to.path.indexOf('pz') >= 0 && !auth ? navigateTo('/login') : true))
-				.catch(() => (result = to.path.indexOf('pz') >= 0 ? navigateTo('/login') : true));
-		} catch (error) {
-			console.log(error);
-		}
+	setRoutes();
+	try {
+		const kc = useNuxtApp().$kc;
+		const accTokenCookie = useCookie('x-acc-token');
+		const refTokenCookie = useCookie('x-ref-token');
+		await kc
+			?.init({
+				onLoad: 'check-sso',
+				silentCheckSsoRedirectUri: window?.location?.origin + '/silent-check-sso.html',
+				checkLoginIframe: false,
+				refreshToken: refTokenCookie.value,
+				token: accTokenCookie.value,
+			})
+			.then((auth) => {
+				// pokud je prihlaseny muze vstoupit
+				if (auth) {
+					accTokenCookie.value = kc.token;
+				}
+				// pokud neni prihlaseny a je to zabezpecena stranka, presmeruje na login
+				else if (to.path.indexOf('pz') >= 0) {
+					accTokenCookie.value = null;
+					refTokenCookie.value = null;
+					result = navigateTo('/login');
+					useToast({ type: 'error', message: 'message.permission_error' });
+				}
+			})
+			.catch(() => {
+				if (to.path.indexOf('pz') >= 0) {
+					accTokenCookie.value = null;
+					refTokenCookie.value = null;
+					result = navigateTo('/login');
+					useToast({ type: 'error', message: 'message.permission_error' });
+				}
+			});
+	} catch (error) {
+		console.log(error);
 	}
 	return result;
 }
