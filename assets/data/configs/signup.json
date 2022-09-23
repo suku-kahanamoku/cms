@@ -28,6 +28,15 @@
             }
         },
         {
+            "name": "username",
+            "label": "form.username",
+            "required": true,
+            "cols": {
+                "xs": 12,
+                "sm": 6
+            }
+        },
+        {
             "type": "email",
             "name": "email",
             "label": "form.email",

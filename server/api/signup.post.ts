@@ -1,9 +1,11 @@
+import { SIGNUP } from '@/server/lib/keycloak';
+
 export default defineEventHandler(async (event) => {
 	try {
 		const body = await useBody(event);
-		const password = body.password;
+		const result = await SIGNUP(event, body);
 		return {
-			result: {},
+			result: result,
 			msgs: [{ type: 'success', message: 'message.success_login' }],
 		};
 	} catch (error) {

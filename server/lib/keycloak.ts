@@ -40,6 +40,20 @@ export async function LOGIN(event, username: string, password: string): Promise<
 	};
 }
 
+export async function SIGNUP(event, params): Promise<any> {
+	params.enabled = true;
+	return await keycloak.users.create(params);
+	const data = await keycloak.whoAmI.find();
+	if (data.userId && keycloak.accessToken) {
+		SET_TOKEN(event, keycloak.accessToken, keycloak.refreshToken, data.userId);
+	}
+	return {
+		...data,
+		accessToken: keycloak.accessToken,
+		refresToken: keycloak.refreshToken,
+	};
+}
+
 export async function LOGOUT(event): Promise<void> {
 	const userId = getCookie(event, 'user-id');
 	if (userId) {

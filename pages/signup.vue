@@ -10,7 +10,12 @@
 		},
 	});
 
-	function onSubmit(e): void {}
+	function onSubmit(e): void {
+		if (e?.userId) {
+			setStore('profile', e);
+			navigateTo(useState('redirect')?.value || '/pz');
+		}
+	}
 </script>
 <template>
 	<div>

@@ -25,12 +25,14 @@ export default async function (to, from) {
 				// pokud je prihlaseny muze vstoupit
 				if (auth) {
 					accTokenCookie.value = kc.token;
+					useState('redirect').value = null;
 				}
 				// pokud neni prihlaseny a je to zabezpecena stranka, presmeruje na login
 				else if (to.path.indexOf('pz') >= 0) {
 					accTokenCookie.value = null;
 					refTokenCookie.value = null;
 					result = navigateTo('/login');
+					setStore('redirect', to.path);
 					useToast({ type: 'error', message: 'message.permission_error' });
 				}
 			})
@@ -39,6 +41,7 @@ export default async function (to, from) {
 					accTokenCookie.value = null;
 					refTokenCookie.value = null;
 					result = navigateTo('/login');
+					setStore('redirect', to.path);
 					useToast({ type: 'error', message: 'message.permission_error' });
 				}
 			});

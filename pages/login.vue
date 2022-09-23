@@ -11,7 +11,7 @@
 	});
 
 	function onSubmit(e): void {
-		if (e?.uid) {
+		if (e?.userId) {
 			setStore('profile', e);
 			navigateTo(useState('redirect')?.value || '/pz');
 		}
