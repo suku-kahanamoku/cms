@@ -10,10 +10,10 @@
 
 <template>
 	<v-card>
-		<img src="@/assets/images/background/login-register.jpg" class="w-100" />
+		<img src="@/assets/images/user-info.jpg" class="w-100" />
 		<div class="d-flex justify-center mt-n15">
 			<v-avatar size="100">
-				<img src="@/assets/images/users/1.jpg" width="100" alt="user" />
+				<img src="@/assets/images/1.jpg" width="100" alt="user" />
 			</v-avatar>
 		</div>
 		<v-card-text>

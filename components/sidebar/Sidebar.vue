@@ -15,7 +15,7 @@
 			<div class="profile">
 				<div class="profile-pic">
 					<v-avatar size="45">
-						<img src="@/assets/images/users/user2.jpg" width="50" alt="Julia" />
+						<img src="@/assets/images/1.jpg" width="50" alt="Julia" />
 					</v-avatar>
 				</div>
 				<div class="profile-name">
