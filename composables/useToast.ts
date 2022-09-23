@@ -20,7 +20,7 @@ function callToast(toast, item): void {
 }
 
 export default function (data?: any) {
-	const toast = useToast();
+	const toast = useToast && useToast();
 	// pokud je to pole, projede jednotlive itemy a zavola na kazdem toast
 	if (Array.isArray(data)) {
 		if (data?.length) {
