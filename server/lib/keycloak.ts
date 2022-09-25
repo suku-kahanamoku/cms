@@ -1,7 +1,8 @@
 import KeycloakAdminClient from '@keycloak/keycloak-admin-client';
 import jwt_decode from 'jwt-decode';
 
-const kcInit = JSON.parse(process.env.KEYCLOAK);
+const kcInit = JSON.parse(process.env.KEYCLOAK || '{}');
+const kcAdmin = JSON.parse(process.env.KEYCLOAK_ADMIN || '{}');
 
 export const keycloak = new KeycloakAdminClient({
 	baseUrl: kcInit.url,
@@ -23,12 +24,7 @@ export async function IS_LOGGED(event): Promise<boolean> {
 }
 
 export async function LOGIN(event, username: string, password: string): Promise<any> {
-	await keycloak.auth({
-		username: username,
-		password: password,
-		grantType: 'password',
-		clientId: kcInit.clientId,
-	});
+	await login(username, password);
 	const data = await keycloak.whoAmI.find();
 	if (data.userId && keycloak.accessToken) {
 		SET_TOKEN(event, keycloak.accessToken, keycloak.refreshToken, data.userId);
@@ -40,18 +36,32 @@ export async function LOGIN(event, username: string, password: string): Promise<
 	};
 }
 
+async function login(username: string, password: string) {
+	await keycloak.auth({
+		username: username,
+		password: password,
+		grantType: 'password',
+		clientId: kcInit.clientId,
+	});
+}
+
 export async function SIGNUP(event, params): Promise<any> {
+	// prihlasi se jako admin
+	await login(kcAdmin.username, kcAdmin.password);
+	const password = params.password;
 	params.enabled = true;
-	return await keycloak.users.create(params);
-	const data = await keycloak.whoAmI.find();
-	if (data.userId && keycloak.accessToken) {
-		SET_TOKEN(event, keycloak.accessToken, keycloak.refreshToken, data.userId);
-	}
-	return {
-		...data,
-		accessToken: keycloak.accessToken,
-		refresToken: keycloak.refreshToken,
-	};
+	delete params.password;
+	delete params.repeat_pass;
+	delete params.phone;
+	// vytvori uzivatele
+	const { id } = await keycloak.users.create(params);
+	// nastavi mu heslo
+	await keycloak.users.resetPassword({
+		id: id,
+		credential: { temporary: false, type: 'password', value: password },
+	});
+	// prihlasi a vrati prihlaseneho uzivatele
+	return await LOGIN(event, params.username, password);
 }
 
 export async function LOGOUT(event): Promise<void> {
@@ -63,7 +73,6 @@ export async function LOGOUT(event): Promise<void> {
 }
 
 export async function GET_PROFILES(event, where): Promise<any[]> {
-	return await keycloak.users.find();
 	if (AUTH_CHECK(event, 'realm-management', 'view-users')) {
 		return await keycloak.users.find();
 	} else {

@@ -11,7 +11,7 @@ export default defineNuxtConfig({
 	vite: {
 		define: {
 			'process.env.DEBUG': false,
-			'process.env.KEYCLOAK': process.env.KEYCLOAK
+			'process.env.KEYCLOAK': process.env.KEYCLOAK,
 		},
 	},
 });
