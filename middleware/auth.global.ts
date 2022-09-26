@@ -1,3 +1,5 @@
+import { ITERATE } from '~~/utils/modify-object.function';
+
 /**
  * Middleware pro kontrolu a nastavi pages, do kterych ma uzivatel opravneni vstoupit
  *
@@ -8,7 +10,7 @@
  */
 export default async function (to, from) {
 	let result: any = true;
-	setRoutes();
+	const routes = setRoutes();
 	try {
 		const kc = useNuxtApp().$kc;
 		const accTokenCookie = useCookie('x-acc-token');
@@ -31,7 +33,7 @@ export default async function (to, from) {
 				else if (to.path.indexOf('pz') >= 0) {
 					accTokenCookie.value = null;
 					refTokenCookie.value = null;
-					result = navigateTo('/login');
+					result = navigateTo(routes.login?.path);
 					setStore('redirect', to.path);
 					useToast({ type: 'error', message: 'message.permission_error' });
 				}
@@ -40,7 +42,7 @@ export default async function (to, from) {
 				if (to.path.indexOf('pz') >= 0) {
 					accTokenCookie.value = null;
 					refTokenCookie.value = null;
-					result = navigateTo('/login');
+					result = navigateTo(routes.login?.path);
 					setStore('redirect', to.path);
 					useToast({ type: 'error', message: 'message.permission_error' });
 				}
@@ -51,7 +53,7 @@ export default async function (to, from) {
 	return result;
 }
 
-function setRoutes() {
+function setRoutes(): any {
 	const routes = useRouter().getRoutes();
 	routes.forEach((route: any) => {
 		route.children = routes
@@ -76,4 +78,11 @@ function setRoutes() {
 			route.meta.parentName = parent.name;
 		}
 	});
+	// vytvori routy jako objekt, aby se s nema dalo jednoduse pracovat
+	const result = {};
+	ITERATE(routes, (route) => {
+		result[route.name] = route;
+	});
+	setStore('routes', result);
+	return result;
 }

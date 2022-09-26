@@ -52,7 +52,6 @@ export async function SIGNUP(event, params): Promise<any> {
 	params.enabled = true;
 	delete params.password;
 	delete params.repeat_pass;
-	delete params.phone;
 	// vytvori uzivatele
 	const { id } = await keycloak.users.create(params);
 	// nastavi mu heslo

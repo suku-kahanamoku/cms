@@ -21,31 +21,22 @@
 				<h2 class="mb-0 mt-4 font-weight-regular">
 					{{ data?.title ? $t(data?.title) : $t(data?.name || 'empty') }}
 				</h2>
-				<small>{{ data?.syscode }}</small
-				><br />
-				<v-row>
-					<v-col cols="6">
-						<v-btn :to="data?.path" icon="mdi-account-edit" color="primary" />
-					</v-col>
-					<v-col cols="6">
-						<ConfirmDialog @confirm="$event && emits('delete', data)">
-							<template v-slot:btn>
-								<v-btn icon="mdi-delete" color="error" />
-							</template>
-							<template v-slot:title>
-								{{ $t('method.delete') }}
-							</template>
-							<template v-slot:text>
-								{{
-									$t('query.delete', {
-										name: data?.title ? $t(data?.title) : $t(data?.name || 'empty'),
-									})
-								}}
-							</template>
-						</ConfirmDialog>
-					</v-col>
-				</v-row>
+				<small>{{ data?.syscode }}</small>
 			</div>
 		</v-card-text>
+		<v-card-actions class="d-flex justify-center">
+			<v-btn :to="data.path" icon="mdi-account-edit" color="primary" />
+			<ConfirmDialog @confirm="$event && emits('delete', data)">
+				<template v-slot:btn>
+					<v-btn icon="mdi-delete" color="error" />
+				</template>
+				<template v-slot:title>
+					{{ $t('method.delete') }}
+				</template>
+				<template v-slot:text>
+					{{ $t('query.delete', { name: data?.firstName + '&nbsp;' + data?.lastName }) }}
+				</template>
+			</ConfirmDialog>
+		</v-card-actions>
 	</v-card>
 </template>

@@ -41,16 +41,6 @@
                 "xs": 12,
                 "sm": 6
             }
-        },
-        {
-            "type": "tel",
-            "name": "phone",
-            "label": "form.phone",
-            "autocomplete": "tel",
-            "cols": {
-                "xs": 12,
-                "sm": 6
-            }
         }
     ]
 }

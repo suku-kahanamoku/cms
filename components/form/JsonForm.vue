@@ -63,7 +63,7 @@
 			/>
 		</v-card-text>
 		<v-card-actions>
-			<v-spacer></v-spacer>
+			<v-spacer />
 			<v-btn
 				color="primary"
 				:loading="formController.loading.value"

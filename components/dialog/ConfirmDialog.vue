@@ -34,7 +34,7 @@
 				<v-btn color="primary" text @click="onConfirm(true)">
 					{{ $t('btn.yes') }}
 				</v-btn>
-				<v-spacer></v-spacer>
+				<v-spacer />
 				<v-btn color="primary" text @click="onConfirm(false)">
 					{{ $t('btn.no') }}
 				</v-btn>

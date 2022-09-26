@@ -24,7 +24,7 @@
 					<v-btn v-if="index === 0" :to="item.path" variant="plain">
 						{{ col.value === 'title' || col.value === 'name' ? $t(item[col.value]) : item[col.value] }}
 					</v-btn>
-					<template v-else-if="col.value === 'action'">
+					<div v-else-if="col.value === 'action'" class="d-flex justify-space-around">
 						<v-btn :to="item?.path" size="x-small" icon="mdi-account-edit" color="primary" />
 						<ConfirmDialog @confirm="$event && emits('delete', item)">
 							<template v-slot:btn>
@@ -41,7 +41,7 @@
 								}}
 							</template>
 						</ConfirmDialog>
-					</template>
+					</div>
 					<template v-else>
 						{{ item[col.value] }}
 					</template>

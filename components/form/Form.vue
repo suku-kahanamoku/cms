@@ -49,11 +49,11 @@
 							:md="field.cols?.md"
 							:lg="field.cols?.lg"
 						>
-							<Field :field="field" :value="formController.loading.value === false && field.value" />
+							<Field :field="field" :value="field.value" />
 						</v-col>
 					</v-row>
 					<v-row>
-						<v-spacer></v-spacer>
+						<v-spacer />
 						<v-btn
 							color="primary"
 							type="submit"
@@ -80,12 +80,12 @@
 						:md="field.cols?.md"
 						:lg="field.cols?.lg"
 					>
-						<Field :field="field" :value="formController.loading.value === false && field.value" />
+						<Field :field="field" :value="field.value" />
 					</v-col>
 				</v-row>
 			</v-card-text>
 			<v-card-actions>
-				<v-spacer></v-spacer>
+				<v-spacer />
 				<v-btn
 					color="primary"
 					type="submit"
@@ -105,7 +105,7 @@
 				:md="field.cols?.md"
 				:lg="field.cols?.lg"
 			>
-				<Field :field="field" :value="formController.loading.value === false && field.value" />
+				<Field :field="field" :value="field.value" />
 			</v-col>
 		</v-row>
 	</v-form>

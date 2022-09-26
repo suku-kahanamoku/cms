@@ -4,44 +4,25 @@
 	import Sidebar from '@/components/sidebar/Sidebar.vue';
 	import Header from '@/components/header/Header.vue';
 
-	const drawer = ref(undefined || true);
+	const drawer = ref();
 	/* const innerW = window.innerWidth; */
-	const { mdAndUp, mdAndDown } = useDisplay();
+	const { mdAndUp, smAndDown } = useDisplay();
 </script>
 <template>
 	<div>
 		<v-app>
-			<!-- ---------------------------------------------- -->
-			<!---Header -->
-			<!-- ---------------------------------------------- -->
-			<v-app-bar elevation="0" color="primary">
-				<div class="pe-5">
-					<NuxtLink to="/" class="d-flex">
-						<img src="@/assets/images/logo.svg" width="140" alt="logo" />
-					</NuxtLink>
-				</div>
-				<v-app-bar-nav-icon class="" @click="drawer = !drawer" />
-				<v-spacer />
-				<!-- ---------------------------------------------- -->
-				<!-- User Profile -->
-				<!-- ---------------------------------------------- -->
+			<!-- toolbar -->
+			<v-app-bar elevation="2" color="primary">
 				<Header />
+				<v-app-bar-nav-icon v-if="smAndDown" @click="drawer = !drawer" />
 			</v-app-bar>
-			<!-- ---------------------------------------------- -->
-			<!---Sidebar -->
-			<!-- ---------------------------------------------- -->
-			<v-navigation-drawer
-				left
-				:permanent="mdAndUp"
-				elevation="10"
-				app
-				:temporary="mdAndDown"
-				v-model="drawer"
-				expand-on-hover
-			>
+
+			<!-- sidemenu -->
+			<v-navigation-drawer :permanent="mdAndUp" elevation="4" v-model="drawer">
 				<Sidebar />
 			</v-navigation-drawer>
-			<!-- main -->
+
+			<!-- content -->
 			<v-main>
 				<v-container fluid class="w-100 h-100">
 					<slot />

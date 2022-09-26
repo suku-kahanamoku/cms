@@ -19,10 +19,6 @@
             "value": "lastName"
         },
         {
-            "label": "form.phone",
-            "value": "phone"
-        },
-        {
             "label": "",
             "value": "action"
         }
