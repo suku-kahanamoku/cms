@@ -4,10 +4,10 @@ import { defineNuxtConfig } from 'nuxt';
 export default defineNuxtConfig({
 	/*ssr: false,*/
 	build: {
-		extractCSS: false,
+		extractCSS: true,
 		transpile: ['vuetify', 'ol', 'vue-toastification'],
 	},
-	css: ['@/assets/scss/style.scss'],
+	css: ['@/assets/scss/main.scss', 'vuetify/styles'],
 	vite: {
 		define: {
 			'process.env.DEBUG': false,

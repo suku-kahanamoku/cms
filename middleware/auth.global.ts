@@ -45,6 +45,7 @@ export default async function (to, from) {
 					useToast({ type: 'error', message: 'message.permission_error' });
 				}
 			});
+		console.log(kc);
 	} catch (error) {
 		console.log(error);
 	}
@@ -76,10 +77,4 @@ function setRoutes() {
 			route.meta.parentName = parent.name;
 		}
 	});
-	setStore(
-		'routes',
-		routes
-			.filter((route) => !route.meta.parentName && route.meta.visible !== false)
-			.sort((a: any, b: any) => (a.meta.pos || 0) - (b.meta.pos || 0))
-	);
 }
