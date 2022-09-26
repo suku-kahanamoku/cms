@@ -23,7 +23,7 @@
 			<v-tab value="json">{{ $t('info.json') }}</v-tab>
 		</v-tabs>
 
-		<v-window v-model="tab">
+		<v-window v-model="tab" class="pa-1">
 			<v-window-item value="form">
 				<Form :config="config" @select="item = $event" @submit="item = $event" />
 			</v-window-item>

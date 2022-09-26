@@ -41,7 +41,7 @@
 	</div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 	.profile {
 		background: url('assets/images/user-info.jpg') no-repeat;
 	}

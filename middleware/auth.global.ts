@@ -45,7 +45,6 @@ export default async function (to, from) {
 					useToast({ type: 'error', message: 'message.permission_error' });
 				}
 			});
-		console.log(kc);
 	} catch (error) {
 		console.log(error);
 	}

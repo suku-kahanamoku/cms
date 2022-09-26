@@ -8,7 +8,7 @@
 		"node": "node .output/server/index.mjs"
 	},
 	"devDependencies": {
-		"nuxt": "3.0.0-rc.9"
+		"nuxt": "3.0.0-rc.11"
 	},
 	"dependencies": {
 		"@keycloak/keycloak-admin-client": "^19.0.2",
