@@ -79,6 +79,14 @@ export async function GET_PROFILES(event, where): Promise<any[]> {
 	}
 }
 
+export async function DELETE_PROFILE(event, id: string): Promise<void> {
+	if (AUTH_CHECK(event, 'realm-management', 'manage-users')) {
+		await keycloak.users.del({ id: id });
+	} else {
+		throw createError({ statusCode: 403, statusMessage: 'message.permission_error' });
+	}
+}
+
 export async function AUTH_CHECK(event, roleGroup: string, role: string): Promise<boolean> {
 	let result = false;
 	if (IS_LOGGED(event)) {

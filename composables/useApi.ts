@@ -7,7 +7,7 @@ export default async function (url: string, options?: any): Promise<any> {
 				if (data?.msgs?.length) {
 					useToast(data?.msgs);
 				}
-				return options?.all ? data : data.result;
+				return data.result || data;
 			})
 			.catch((error) => {
 				if (error?.data?.msgs?.length) {
