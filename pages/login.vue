@@ -1,6 +1,7 @@
 <script setup lang="ts">
 	import Form from '@/components/form/Form.vue';
-	import config from '@/assets/data/configs/login.json';
+	import loginConfig from '@/assets/data/configs/login.json';
+import { CLONE } from '@/utils/modify-object.function';
 
 	definePageMeta({
 		title: 'route.login',
@@ -9,6 +10,8 @@
 			value: 'mdi-login',
 		},
 	});
+
+	const config = CLONE(loginConfig);
 
 	function onSubmit(e): void {
 		if (e?.userId) {

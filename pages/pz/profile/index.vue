@@ -1,7 +1,8 @@
 <script setup lang="ts">
 	import List from '@/components/list/List.vue';
-	import config from '@/assets/data/configs/profile_list.json';
-	import configForm from '@/assets/data/configs/profile.json';
+	import listConfig from '@/assets/data/configs/profile_list.json';
+	import formConfig from '@/assets/data/configs/profile.json';
+	import { CLONE } from '@/utils/modify-object.function';
 
 	definePageMeta({
 		syscode: 'profile',
@@ -11,6 +12,8 @@
 		},
 	});
 
+	const config = CLONE(listConfig);
+	const configForm = CLONE(formConfig);
 	const route = useRoute();
 	const data = ref([]);
 	const loading = ref();
@@ -28,7 +31,7 @@
 	async function load(url: string) {
 		loading.value = true;
 		const result = await useApi(url);
-		result.forEach((item) => {
+		result?.forEach((item) => {
 			item.name = item.username;
 			item.path = `${route.path}/${item.id}`;
 		});
@@ -37,14 +40,16 @@
 	}
 
 	async function onDelete(item) {
-		const result = await useApi(`${config.restUrl}/${item.id}`, { method: 'DELETE' });
-		if (result?.status === 'OK') {
-			load(config.restUrl);
+		if (item?.id) {
+			const result = await useSubmit(`${config.restUrl}/${item.id}`, null, null, 'DELETE');
+			if (result?.status === 'OK') {
+				load(config.restUrl);
+			}
 		}
 	}
 
 	function onSubmit(item) {
-		if (item.id) {
+		if (item?.id) {
 			navigateTo(`${route.path}/${item.id}`);
 		}
 	}

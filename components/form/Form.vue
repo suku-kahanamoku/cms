@@ -1,6 +1,6 @@
 <script setup lang="ts">
 	import Field from '@/components/form/field/Field.vue';
-	import FormController from '@/components/form/formController';
+	import { RESOLVE_MARKS, RTRIM } from '@/utils/modify-string.functions';
 
 	const props = defineProps<{
 		config: any;
@@ -8,33 +8,50 @@
 	}>();
 
 	const emits = defineEmits(['load', 'select', 'submit']);
-	const formController = new FormController(props.config);
+	const route = useRoute();
 	const form = ref();
+	const loading = ref();
 	const panels = ref([0]);
+	const item = ref();
+
+	onMounted(process);
+
+	watch(route, process);
 
 	watch(
 		() => props.data,
-		(data) => formController.load(null, data)
+		(value) => (item.value = value)
 	);
-	watch(formController.items, (items) => emits('load', items));
-	watch(formController.item, (item) => {
-		props.config?.fields?.forEach((field) => (field.value = item[field.name]));
-		emits('select', item);
-	});
 
-	async function onSubmit() {
-		const result = await formController.onSubmit(form, props.config.method);
-		if (props.config.method === 'GET') {
-			emits('submit', props.config?.syscode + '=' + result);
-		} else {
-			emits('submit', result);
+	async function process(): Promise<void> {
+		useResolveUrl(route, props.config);
+		load();
+	}
+
+	async function load(): Promise<void> {
+		loading.value = true;
+		const url = RTRIM(RESOLVE_MARKS(props.config.restUrl, { route: route }), '/');
+		const result = await useLoad(url);
+		emits('load', result);
+		if (route.params.id?.length) {
+			item.value = result?.find((item) => item?.id === route.params.id[0]);
+			emits('select', item);
 		}
+		loading.value = false;
+	}
+
+	async function submit(): Promise<void> {
+		loading.value = true;
+		const url = RTRIM(RESOLVE_MARKS(props.config.submitUrl, { route: route }), '/');
+		const result = await useSubmit(url, form, props.config.fields, props.config.method);
+		emits('submit', result);
+		loading.value = false;
 	}
 </script>
 <template>
-	<v-progress-linear v-if="formController.loading.value" indeterminate></v-progress-linear>
+	<v-progress-linear v-if="loading" indeterminate></v-progress-linear>
 
-	<v-form ref="form" @submit.prevent="onSubmit">
+	<v-form ref="form" @submit.prevent="submit">
 		<v-expansion-panels v-if="config?.theme === 'accordion'" v-model="panels">
 			<v-expansion-panel>
 				<v-expansion-panel-title v-if="config?.title" dark :color="config?.color">
@@ -54,12 +71,7 @@
 					</v-row>
 					<v-row>
 						<v-spacer />
-						<v-btn
-							color="primary"
-							type="submit"
-							:loading="formController.loading.value"
-							:disabled="!config?.submitUrl"
-						>
+						<v-btn color="primary" type="submit" :loading="loading" :disabled="!config?.submitUrl">
 							{{ $t('btn.send') }}
 						</v-btn>
 					</v-row>
@@ -80,18 +92,13 @@
 						:md="field.cols?.md"
 						:lg="field.cols?.lg"
 					>
-						<Field :field="field" :value="field.value" />
+						<Field :field="field" :value="item && item[field.name]" />
 					</v-col>
 				</v-row>
 			</v-card-text>
 			<v-card-actions>
 				<v-spacer />
-				<v-btn
-					color="primary"
-					type="submit"
-					:loading="formController.loading.value"
-					:disabled="!config?.submitUrl"
-				>
+				<v-btn color="primary" type="submit" :loading="loading" :disabled="!config?.submitUrl">
 					{{ $t('btn.send') }}
 				</v-btn>
 			</v-card-actions>
@@ -105,7 +112,7 @@
 				:md="field.cols?.md"
 				:lg="field.cols?.lg"
 			>
-				<Field :field="field" :value="field.value" />
+				<Field :field="field" :value="loading === false && field.value" />
 			</v-col>
 		</v-row>
 	</v-form>

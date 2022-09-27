@@ -1,6 +1,7 @@
 <script setup lang="ts">
 	import Form from '@/components/form/Form.vue';
-	import config from '@/assets/data/configs/signup.json';
+	import signupConfig from '@/assets/data/configs/signup.json';
+	import { CLONE } from '@/utils/modify-object.function';
 
 	definePageMeta({
 		title: 'route.signup',
@@ -9,6 +10,8 @@
 			value: 'mdi-account',
 		},
 	});
+
+	const config = CLONE(signupConfig);
 
 	function onSubmit(e): void {
 		if (e?.userId) {

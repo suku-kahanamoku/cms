@@ -92,7 +92,7 @@
 	}
 
 	async function onSubmit(url, form?, fieldConfigs?, loading?, method?: string) {
-		useSubmit(url, form, fieldConfigs, loading, method);
+		
 	}
 </script>
 

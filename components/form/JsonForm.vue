@@ -1,7 +1,8 @@
 <script setup lang="ts">
-	import FormController from '@/components/form/FormController';
-	import { CLONE, ITERATE } from '@/utils/modify-object.function';
 	import VueJsoneditor from 'vue3-ts-jsoneditor';
+
+	import { CLONE, ITERATE } from '@/utils/modify-object.function';
+	import { RTRIM, RESOLVE_MARKS } from '@/utils/modify-string.functions';
 
 	const props = defineProps<{
 		config: any;
@@ -9,8 +10,9 @@
 	}>();
 
 	const emits = defineEmits(['submit']);
-	const formController = new FormController(props.config);
+	const route = useRoute();
 	const changedData = ref('');
+	const loading = ref();
 
 	const onError = (e) => {
 		console.log(e);
@@ -24,7 +26,8 @@
 		console.log(e);
 	};
 
-	const onSubmit = async () => {
+	async function submit(): Promise<void> {
+		loading.value = true;
 		try {
 			// prevede data do json
 			const tmpData = CLONE(changedData.value ? JSON.parse(changedData.value) : props.data || {});
@@ -37,13 +40,15 @@
 					validate: () => ({ valid: true }),
 				},
 			};
-			const result = await formController.onSubmit(form, props.config.method);
+			const url = RTRIM(RESOLVE_MARKS(props.config.submitUrl, { route: route }), '/');
+			const result = await useSubmit(url, form, props.config.fields, props.config.method);
 			emits('submit', result);
 		} catch (error) {
 			console.error(error);
 			useToast({ type: 'error', message: 'form.msg.wrong_json' });
 		}
-	};
+		loading.value = false;
+	}
 </script>
 
 <template>
@@ -64,12 +69,7 @@
 		</v-card-text>
 		<v-card-actions>
 			<v-spacer />
-			<v-btn
-				color="primary"
-				:loading="formController.loading.value"
-				:disabled="!config.submitUrl"
-				@click="onSubmit"
-			>
+			<v-btn color="primary" :loading="loading" :disabled="!config.submitUrl" @click="submit">
 				{{ $t('btn.send') }}
 			</v-btn>
 		</v-card-actions>

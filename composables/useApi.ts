@@ -15,7 +15,6 @@ export default async function (url: string, options?: any): Promise<any> {
 				} else {
 					useToast({ type: 'error', message: error?.data?.message || error.message });
 				}
-				throw new Error(error);
 			});
 	}
 }

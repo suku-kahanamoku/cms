@@ -2,6 +2,5 @@
     "title": "route.profile",
     "color": "primary",
     "method": "PATCH",
-    "restUrl": "",
     "submitUrl": "/api/profile/${route.params.id.0}"
 }

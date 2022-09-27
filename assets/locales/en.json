@@ -72,8 +72,9 @@
 		"type": "Type",
 		"method": "Method",
 		"value": "Value",
-		"enable":"Enable",
-		"disable":"Disable"
+		"enable": "Enable",
+		"disable": "Disable",
+		"username": "User name"
 	},
 	"settings": {
 		"cwp_setup": "CWP setup",

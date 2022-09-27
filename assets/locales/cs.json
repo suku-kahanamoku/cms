@@ -73,7 +73,8 @@
 		"method": "Způsob",
 		"value": "Hodnota",
 		"enable": "Povolit",
-		"disable": "Zakázat"
+		"disable": "Zakázat",
+		"username": "User name"
 	},
 	"settings": {
 		"cwp_setup": "CWP setup",

@@ -8,7 +8,7 @@
     "fields": [
         {
             "name": "id",
-            "label": "form.id",
+            "label": "id",
             "disabled": true,
             "cols": {
                 "xs": 12,
