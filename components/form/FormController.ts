@@ -1,6 +1,6 @@
 import { IS_NUMERIC, IS_DEFINED, IS_OBJECT } from '@/utils/check.functions';
 import { ITERATE } from '@/utils/modify-object.function';
-import { GET_MARK, RESOLVE_MARKS, TRIM } from '@/utils/modify-string.functions';
+import { GET_MARK, RESOLVE_MARKS, RTRIM, TRIM } from '@/utils/modify-string.functions';
 import { IFormField } from '@/components/form/field/field.interface';
 
 export default class FormController {
@@ -129,7 +129,7 @@ export default class FormController {
 	 * @memberof FormController
 	 */
 	public async onSubmit(form, method: string): Promise<any> {
-		const url = RESOLVE_MARKS(this.config.submitUrl, this);
+		const url = RTRIM(RESOLVE_MARKS(this.config.submitUrl, this), '/');
 		return await this._submit(url, form, this.config.fields, method);
 	}
 

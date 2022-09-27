@@ -16,6 +16,15 @@
             }
         },
         {
+            "name": "username",
+            "label": "form.username",
+            "disabled": true,
+            "cols": {
+                "xs": 12,
+                "sm": 6
+            }
+        },
+        {
             "name": "firstName",
             "label": "form.firstname",
             "required": true,

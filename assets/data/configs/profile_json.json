@@ -3,5 +3,5 @@
     "color": "primary",
     "method": "PATCH",
     "restUrl": "",
-    "submitUrl": "/api/profile?where={\"id\":\"${route.params.id.0}\"}"
+    "submitUrl": "/api/profile/${route.params.id.0}"
 }

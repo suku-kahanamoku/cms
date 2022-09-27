@@ -96,6 +96,17 @@ export async function UPDATE_PROFILE(event, params): Promise<any> {
 	}
 }
 
+export async function CREATE_PROFILE(event, params): Promise<any> {
+	if (AUTH_CHECK(event, 'realm-management', 'manage-users')) {
+		params.enabled = true;
+		delete params.id;
+		const { id } = await keycloak.users.create(params);
+		return await keycloak.users.findOne({ id: id });
+	} else {
+		throw createError({ statusCode: 403, statusMessage: 'message.permission_error' });
+	}
+}
+
 export async function AUTH_CHECK(event, roleGroup: string, role: string): Promise<boolean> {
 	let result = false;
 	if (IS_LOGGED(event)) {

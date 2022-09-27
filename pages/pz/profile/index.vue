@@ -1,6 +1,7 @@
 <script setup lang="ts">
 	import List from '@/components/list/List.vue';
 	import config from '@/assets/data/configs/profile_list.json';
+	import configForm from '@/assets/data/configs/profile.json';
 
 	definePageMeta({
 		syscode: 'profile',
@@ -13,8 +14,14 @@
 	const route = useRoute();
 	const data = ref([]);
 	const loading = ref();
+	const tab = ref();
 
 	onMounted(() => {
+		configForm.method = 'POST';
+		const usernameField = configForm.fields.find((field) => field.name === 'username');
+		if (usernameField) {
+			usernameField.disabled = false;
+		}
 		load(config.restUrl);
 	});
 
@@ -35,12 +42,29 @@
 			load(config.restUrl);
 		}
 	}
+
+	function onSubmit(item) {
+		if (item.id) {
+			navigateTo(`${route.path}/${item.id}`);
+		}
+	}
 </script>
 
 <template>
 	<div>
-		<v-progress-linear v-if="loading" indeterminate></v-progress-linear>
+		<v-tabs v-model="tab" background-color="primary">
+			<v-tab value="list">{{ $t('info.list') }}</v-tab>
+			<v-tab value="create">{{ $t('btn.create') }}</v-tab>
+		</v-tabs>
 
-		<List v-if="loading === false" :config="config" :data="data" @delete="onDelete" />
+		<v-window v-model="tab" class="pa-1">
+			<v-window-item value="list">
+				<v-progress-linear v-if="loading" indeterminate></v-progress-linear>
+				<List v-if="loading === false" :config="config" :data="data" @delete="onDelete" />
+			</v-window-item>
+			<v-window-item value="create">
+				<Form :config="configForm" @submit="onSubmit" />
+			</v-window-item>
+		</v-window>
 	</div>
 </template>
