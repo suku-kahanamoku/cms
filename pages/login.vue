@@ -1,7 +1,7 @@
 <script setup lang="ts">
 	import Form from '@/components/form/Form.vue';
 	import loginConfig from '@/assets/data/configs/login.json';
-import { CLONE } from '@/utils/modify-object.function';
+	import { CLONE } from '@/utils/modify-object.function';
 
 	definePageMeta({
 		title: 'route.login',

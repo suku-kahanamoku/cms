@@ -1,8 +1,8 @@
 <script setup lang="ts">
 	import Form from '@/components/form/Form.vue';
 	import JsonForm from '@/components/form/JsonForm.vue';
-	import profileConfig from '@/assets/data/configs/profile.json';
-	import jsonConfig from '@/assets/data/configs/profile_json.json';
+	import profileConfig from '@/assets/data/configs/profile/profile.json';
+	import jsonConfig from '@/assets/data/configs/profile/profile_json.json';
 	import { CLONE } from '@/utils/modify-object.function';
 
 	definePageMeta({
@@ -28,7 +28,7 @@
 
 		<v-window v-model="tab" class="pa-1">
 			<v-window-item value="form">
-				<Form :config="config" :data="item" @select="item = $event" @submit="item = $event" />
+				<Form :config="config" :data="item" @submit="item = $event" @select="item = $event" />
 			</v-window-item>
 			<v-window-item value="json">
 				<JsonForm :config="configJson" :data="item" @submit="item = $event" />

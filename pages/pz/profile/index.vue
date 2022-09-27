@@ -1,7 +1,7 @@
 <script setup lang="ts">
 	import List from '@/components/list/List.vue';
-	import listConfig from '@/assets/data/configs/profile_list.json';
-	import formConfig from '@/assets/data/configs/profile.json';
+	import listConfig from '@/assets/data/configs/profile/profile_list.json';
+	import formConfig from '@/assets/data/configs/profile/profile_create.json';
 	import { CLONE } from '@/utils/modify-object.function';
 
 	definePageMeta({
@@ -20,11 +20,6 @@
 	const tab = ref();
 
 	onMounted(() => {
-		configForm.method = 'POST';
-		const usernameField = configForm.fields.find((field) => field.name === 'username');
-		if (usernameField) {
-			usernameField.disabled = false;
-		}
 		load(config.restUrl);
 	});
 
