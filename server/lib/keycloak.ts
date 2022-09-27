@@ -70,10 +70,9 @@ export async function GET_PROFILES(event, where): Promise<any[]> {
 	}
 }
 
-export async function GET_PROFILE(event, where, id: string): Promise<any[]> {
+export async function GET_PROFILE(event, id: string): Promise<any> {
 	if (AUTH_CHECK(event, 'realm-management', 'view-users')) {
-		const users = await GET_PROFILES(event, where);
-		return users.find((user) => user.id === id);
+		return await keycloak.users.findOne({ id: id });
 	} else {
 		throw createError({ statusCode: 403, statusMessage: 'message.permission_error' });
 	}
