@@ -36,15 +36,6 @@ export async function LOGIN(event, username: string, password: string): Promise<
 	};
 }
 
-async function login(username: string, password: string) {
-	await keycloak.auth({
-		username: username,
-		password: password,
-		grantType: 'password',
-		clientId: kcInit.clientId,
-	});
-}
-
 export async function SIGNUP(event, params): Promise<any> {
 	// prihlasi se jako admin
 	await login(kcAdmin.username, kcAdmin.password);
@@ -79,9 +70,27 @@ export async function GET_PROFILES(event, where): Promise<any[]> {
 	}
 }
 
+export async function GET_PROFILE(event, where, id: string): Promise<any[]> {
+	if (AUTH_CHECK(event, 'realm-management', 'view-users')) {
+		const users = await GET_PROFILES(event, where);
+		return users.find((user) => user.id === id);
+	} else {
+		throw createError({ statusCode: 403, statusMessage: 'message.permission_error' });
+	}
+}
+
 export async function DELETE_PROFILE(event, id: string): Promise<void> {
 	if (AUTH_CHECK(event, 'realm-management', 'manage-users')) {
 		await keycloak.users.del({ id: id });
+	} else {
+		throw createError({ statusCode: 403, statusMessage: 'message.permission_error' });
+	}
+}
+
+export async function UPDATE_PROFILE(event, params): Promise<any> {
+	if (AUTH_CHECK(event, 'realm-management', 'manage-users')) {
+		await keycloak.users.update({ id: params.id }, params);
+		return await keycloak.users.findOne({ id: params.id });
 	} else {
 		throw createError({ statusCode: 403, statusMessage: 'message.permission_error' });
 	}
@@ -111,4 +120,13 @@ export async function SET_TOKEN(event, accToken: string, refToken?: string, user
 		deleteCookie(event, 'x-ref-token');
 		deleteCookie(event, 'user-id');
 	}
+}
+
+async function login(username: string, password: string) {
+	await keycloak.auth({
+		username: username,
+		password: password,
+		grantType: 'password',
+		clientId: kcInit.clientId,
+	});
 }

@@ -3,9 +3,18 @@
     "color": "primary",
     "theme": "card",
     "method": "PATCH",
-    "restUrl": "/api/profile?where={\"id\":\"${route.params.id.0}\"}",
-    "submitUrl": "/api/profile?where={\"id\":\"${route.params.id.0}\"}",
+    "restUrl": "/api/profile/${route.params.id.0}",
+    "submitUrl": "/api/profile/${route.params.id.0}",
     "fields": [
+        {
+            "name": "id",
+            "label": "form.id",
+            "disabled": true,
+            "cols": {
+                "xs": 12,
+                "sm": 6
+            }
+        },
         {
             "name": "firstName",
             "label": "form.firstname",

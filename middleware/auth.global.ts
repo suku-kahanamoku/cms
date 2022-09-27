@@ -1,4 +1,4 @@
-import { ITERATE } from '~~/utils/modify-object.function';
+import { ITERATE } from '@/utils/modify-object.function';
 
 /**
  * Middleware pro kontrolu a nastavi pages, do kterych ma uzivatel opravneni vstoupit

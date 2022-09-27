@@ -30,7 +30,7 @@
 	}
 
 	async function onDelete(item) {
-		const result = await useApi(config.restUrl, { method: 'DELETE', body: { id: item.id } });
+		const result = await useApi(`${config.restUrl}/${item.id}`, { method: 'DELETE' });
 		if (result?.status === 'OK') {
 			load(config.restUrl);
 		}

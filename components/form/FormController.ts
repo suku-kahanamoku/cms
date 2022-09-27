@@ -129,7 +129,8 @@ export default class FormController {
 	 * @memberof FormController
 	 */
 	public async onSubmit(form, method: string): Promise<any> {
-		return await this._submit(RESOLVE_MARKS(this.config.submitUrl, this), form, this.config.fields, method);
+		const url = RESOLVE_MARKS(this.config.submitUrl, this);
+		return await this._submit(url, form, this.config.fields, method);
 	}
 
 	/**
@@ -165,7 +166,6 @@ export default class FormController {
 			// pokud je to delete => smaze
 			else if (method === 'DELETE') {
 				options.body = vForm;
-				options.all = true;
 				this.loading.value = true;
 				result = await useApi(url, options).catch((error) => {
 					throw new Error(error);
