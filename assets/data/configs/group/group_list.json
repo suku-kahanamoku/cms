@@ -1,0 +1,27 @@
+{
+    "title": "btn.search",
+    "restUrl": "/api/group",
+    "cols": [
+        {
+            "label": "form.name",
+            "value": "name"
+        },
+        {
+            "label": "form.email",
+            "value": "email"
+        },
+        {
+            "label": "form.firstname",
+            "value": "firstName"
+        },
+        {
+            "label": "form.lastname",
+            "value": "lastName"
+        },
+        {
+            "label": "",
+            "value": "action"
+        }
+    ],
+    "theme": "table"
+}

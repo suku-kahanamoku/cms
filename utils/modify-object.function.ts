@@ -2,17 +2,6 @@ import { IS_DEFINED, IS_OBJECT } from '@/utils/check.functions';
 import { TRIM } from '@/utils/modify-string.functions';
 
 /**
- * Dany objekt prevede na string
- *
- * @export
- * @param {*} object
- * @returns
- */
-export function STRINGIFY(object: any, replacer?: (key: string, value: any) => any, space?: string | number): string {
-	return JSON.stringify(object, replacer, space);
-}
-
-/**
  * Naklonuje dany objekt
  *
  * @export
@@ -20,7 +9,7 @@ export function STRINGIFY(object: any, replacer?: (key: string, value: any) => a
  * @returns
  */
 export function CLONE(object: any): any {
-	return JSON.parse(STRINGIFY(object) || '{}');
+	return JSON.parse(JSON.stringify(object) || '{}');
 }
 
 /**
@@ -68,7 +57,7 @@ export function FILTER(items: any[], args: string[], additional: string = '_id')
 				// pokud atribut je objekt
 				if (IS_OBJECT(itemProperty)) {
 					// prevede objekt na string a porovna zda v nem neni hledany vyraz
-					if (STRINGIFY(itemProperty).match(new RegExp('' + args, 'i'))) {
+					if (JSON.stringify(itemProperty).match(new RegExp('' + args, 'i'))) {
 						resultArray.push(item);
 					}
 				} else {

@@ -16,14 +16,9 @@
 		"profile_detail": "Profil detail",
 		"role": "Role",
 		"role_detail": "Role detail",
-		"auth": "Oprávnění",
-		"auth_detail": "Oprávnění detail",
-		"address": "Adresař",
-		"pz": "Partnerská zóna",
-		"cmp": "Komponenty",
-		"cmp_detail": "Komponenty detail",
-		"page": "Menu",
-		"page_detail": "Menu detail"
+		"group": "Skupiny",
+		"group_detail": "Skupiny detail",
+		"pz": "Partnerská zóna"
 	},
 	"btn": {
 		"login": "Přihlásit",
@@ -45,7 +40,7 @@
 		"phone": "Telefon",
 		"msg": {
 			"wrong_email": "Špatně zadaný E-mail!",
-			"wrong_json": "Wrong JSON format!"
+			"wrong_json": "Špatný JSON format!"
 		},
 		"category": "Oblast",
 		"message": "Zpráva",
@@ -74,7 +69,7 @@
 		"value": "Hodnota",
 		"enable": "Povolit",
 		"disable": "Zakázat",
-		"username": "User name"
+		"username": "Název uživatele"
 	},
 	"settings": {
 		"cwp_setup": "CWP setup",
@@ -105,18 +100,12 @@
 		"profile_success_created": "Uživatel byl úspěšně přidán.",
 		"profile_success_updated": "Uživatel byl úspěšně upraven.",
 		"profile_success_deleted": "Uživatel byl úspěšně odstraněn.",
-		"auth_success_created": "Autorizace byla úspěšně vytvořena.",
-		"auth_success_updated": "Autorizace byla úspěšně upravena.",
-		"auth_success_deleted": "Autorizace byla úspěšně smazána.",
+		"group_success_created": "Skupina byla úspěšně vytvořena.",
+		"group_success_updated": "Skupina byla úspěšně upravena.",
+		"group_success_deleted": "Skupina byla úspěšně smazána.",
 		"role_success_created": "Role byla úspěšně vytvořena.",
 		"role_success_updated": "Role byla úspěšně upravena.",
 		"role_success_deleted": "Role byla úspěšně smazána.",
-		"cmp_success_created": "Komponenta byla úspěšně vytvořena.",
-		"cmp_success_updated": "Komponenta byla úspěšně upravena.",
-		"cmp_success_deleted": "Komponenta byla úspěšně smazána.",
-		"page_success_created": "Stránka byla úspěšně vytvořena.",
-		"page_success_updated": "Stránka byla úspěšně upravena.",
-		"page_success_deleted": "Stránka byla úspěšně smazána.",
 		"load_error": "Nelze načíst data.",
 		"post_error": "Nelze odeslat záznam.",
 		"patch_error": "Nelze upravit záznam.",

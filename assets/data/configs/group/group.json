@@ -1,0 +1,49 @@
+{
+    "title": "route.group",
+    "color": "primary",
+    "theme": "card",
+    "method": "PATCH",
+    "restUrl": "/api/group/${route.params.id.0}",
+    "submitUrl": "/api/group/${route.params.id.0}",
+    "fields": [
+        {
+            "name": "id",
+            "label": "id",
+            "disabled": true,
+            "cols": {
+                "xs": 12,
+                "sm": 6
+            }
+        },
+        {
+            "name": "username",
+            "label": "form.username",
+            "disabled": true,
+            "cols": {
+                "xs": 12,
+                "sm": 6
+            }
+        },
+        {
+            "name": "firstName",
+            "label": "form.firstname",
+            "required": true,
+            "autocomplete": "given-name",
+            "autofocus": true,
+            "cols": {
+                "xs": 12,
+                "sm": 6
+            }
+        },
+        {
+            "name": "lastName",
+            "label": "form.lastname",
+            "required": true,
+            "autocomplete": "family-name",
+            "cols": {
+                "xs": 12,
+                "sm": 6
+            }
+        }
+    ]
+}

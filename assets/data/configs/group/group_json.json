@@ -1,0 +1,6 @@
+{
+    "title": "route.group",
+    "color": "primary",
+    "method": "PATCH",
+    "submitUrl": "/api/group/${route.params.id.0}"
+}
