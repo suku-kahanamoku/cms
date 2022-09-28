@@ -16,33 +16,28 @@
             }
         },
         {
-            "name": "username",
-            "label": "form.username",
-            "disabled": true,
+            "name": "name",
+            "label": "form.name",
+            "required": true,
             "cols": {
                 "xs": 12,
                 "sm": 6
             }
         },
         {
-            "name": "firstName",
-            "label": "form.firstname",
-            "required": true,
-            "autocomplete": "given-name",
-            "autofocus": true,
+            "type": "search",
+            "name": "subGroups",
+            "label": "form.subgroups",
+            "autocomplete": "off",
+            "multiple": true,
             "cols": {
                 "xs": 12,
                 "sm": 6
-            }
-        },
-        {
-            "name": "lastName",
-            "label": "form.lastname",
-            "required": true,
-            "autocomplete": "family-name",
-            "cols": {
-                "xs": 12,
-                "sm": 6
+            },
+            "restOptions": {
+                "url": "/api/group",
+                "value": "id",
+                "label": "name"
             }
         }
     ]

@@ -21,11 +21,11 @@
 		<tbody>
 			<tr v-for="item in data" :key="item.name">
 				<td v-for="(col, index) in cols">
-					<v-btn v-if="index === 0" :to="item.path" variant="plain">
+					<v-btn v-if="index === 0" :to="item.url" variant="plain">
 						{{ col.value === 'title' || col.value === 'name' ? $t(item[col.value]) : item[col.value] }}
 					</v-btn>
 					<div v-else-if="col.value === 'action'" class="d-flex justify-space-around">
-						<v-btn :to="item?.path" size="x-small" icon="mdi-account-edit" color="primary" />
+						<v-btn :to="item?.url" size="x-small" icon="mdi-account-edit" color="primary" />
 						<ConfirmDialog @confirm="$event && emits('delete', item)">
 							<template v-slot:btn>
 								<v-btn size="x-small" icon="mdi-delete" color="error" />

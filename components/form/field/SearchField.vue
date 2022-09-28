@@ -12,6 +12,7 @@
 	const el = ref();
 	const rule = ref();
 	const fieldValue = ref();
+	const loading = ref();
 
 	onMounted(() => {
 		// inicializuje regex
@@ -35,12 +36,14 @@
 
 	async function loadOptions(restOptions?: any): Promise<void> {
 		if (restOptions?.url) {
+			loading.value = true;
 			const options = await useApi(restOptions.url);
 			props.field.options = options.map((option) => ({
 				value: option[restOptions.value],
 				label: option[restOptions.label],
 				item: option,
 			}));
+			loading.value = false;
 		}
 	}
 </script>
@@ -70,7 +73,7 @@
 		:rules="[(value) => (!value && field.required ? '' : true)]"
 		:chips="field.chips === false ? false : true"
 		:multiple="field.multiple"
-		:items="field.options"
+		:items="field.options?.length ? field.options : []"
 		:item-title="(item) => $t(item.label || 'empty')"
 		item-value="value"
 	/>

@@ -6,8 +6,8 @@
     "submitUrl": "/api/group/${route.params.id.0}",
     "fields": [
         {
-            "name": "username",
-            "label": "form.username",
+            "name": "name",
+            "label": "form.name",
             "required": true,
             "cols": {
                 "xs": 12,
@@ -15,39 +15,19 @@
             }
         },
         {
-            "name": "firstName",
-            "label": "form.firstname",
-            "required": true,
-            "autocomplete": "given-name",
-            "autofocus": true,
+            "type": "search",
+            "name": "subGroups",
+            "label": "form.subgroups",
+            "autocomplete": "off",
+            "multiple": true,
             "cols": {
                 "xs": 12,
                 "sm": 6
-            }
-        },
-        {
-            "name": "lastName",
-            "label": "form.lastname",
-            "required": true,
-            "autocomplete": "family-name",
-            "cols": {
-                "xs": 12,
-                "sm": 6
-            }
-        },
-        {
-            "type": "email",
-            "name": "email",
-            "label": "form.email",
-            "required": true,
-            "autocomplete": "email",
-            "validation": {
-                "msg": "form.msg.wrong_email",
-                "pattern": "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$"
             },
-            "cols": {
-                "xs": 12,
-                "sm": 6
+            "restOptions": {
+                "url": "/api/group",
+                "value": "id",
+                "label": "name"
             }
         }
     ]

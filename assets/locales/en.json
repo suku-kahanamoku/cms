@@ -53,7 +53,7 @@
 		"trans": "Transgender",
 		"description": "Description",
 		"name": "Name",
-		"url": "URL path",
+		"path": "URL path",
 		"operation": "Operation",
 		"altitude": "Altitude",
 		"latitude": "Latitude",
@@ -69,7 +69,8 @@
 		"value": "Value",
 		"enable": "Enable",
 		"disable": "Disable",
-		"username": "User name"
+		"username": "User name",
+		"subgroups": "Sub groups"
 	},
 	"settings": {
 		"cwp_setup": "CWP setup",

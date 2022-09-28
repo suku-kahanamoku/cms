@@ -28,7 +28,7 @@
 		const result = await useApi(url);
 		result?.forEach((item) => {
 			item.name = item.username;
-			item.path = `${route.path}/${item.id}`;
+			item.url = `${route.path}/${item.id}`;
 		});
 		data.value = result;
 		loading.value = false;

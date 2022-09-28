@@ -7,16 +7,12 @@
             "value": "name"
         },
         {
-            "label": "form.email",
-            "value": "email"
+            "label": "form.path",
+            "value": "path"
         },
         {
-            "label": "form.firstname",
-            "value": "firstName"
-        },
-        {
-            "label": "form.lastname",
-            "value": "lastName"
+            "label": "form.subgroups",
+            "value": "subGroups"
         },
         {
             "label": "",

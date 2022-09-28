@@ -53,7 +53,7 @@
 		"trans": "Transgender",
 		"description": "Popis",
 		"name": "Název",
-		"url": "URL",
+		"path": "URL",
 		"operation": "Operace",
 		"altitude": "Altitude",
 		"latitude": "Latitude",
@@ -69,7 +69,8 @@
 		"value": "Hodnota",
 		"enable": "Povolit",
 		"disable": "Zakázat",
-		"username": "Název uživatele"
+		"username": "Název uživatele",
+		"subgroups": "Pod skupiny"
 	},
 	"settings": {
 		"cwp_setup": "CWP setup",

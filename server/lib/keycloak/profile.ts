@@ -15,7 +15,7 @@ export async function GET_PROFILE(event, id: string): Promise<UserRepresentation
 	if (AUTH_CHECK(event, 'realm-management', 'view-users')) {
 		const profile = await keycloak.users.findOne({ id: id });
 		const groups = await GET_PROFILE_GROUPS(event, id);
-		profile.groups = groups.map((group) => group.name);
+		profile.groups = groups.map((group) => group.id);
 		return profile;
 	} else {
 		throw createError({ statusCode: 403, statusMessage: 'message.permission_error' });

@@ -25,7 +25,7 @@
 			</div>
 		</v-card-text>
 		<v-card-actions class="d-flex justify-center">
-			<v-btn :to="data.path" icon="mdi-account-edit" color="primary" />
+			<v-btn :to="data.url" icon="mdi-account-edit" color="primary" />
 			<ConfirmDialog @confirm="$event && emits('delete', data)">
 				<template v-slot:btn>
 					<v-btn icon="mdi-delete" color="error" />
