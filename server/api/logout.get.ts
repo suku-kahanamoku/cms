@@ -1,4 +1,4 @@
-import { LOGOUT } from '../lib/keycloak';
+import { LOGOUT } from '@/server/lib/keycloak/account';
 
 export default defineEventHandler(async (event) => {
 	try {

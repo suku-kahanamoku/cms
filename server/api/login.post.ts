@@ -1,4 +1,4 @@
-import { LOGIN } from '../lib/keycloak';
+import { LOGIN } from '@/server/lib/keycloak/account';
 
 export default defineEventHandler(async (event) => {
 	try {

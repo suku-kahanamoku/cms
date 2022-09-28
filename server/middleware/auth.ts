@@ -1,4 +1,5 @@
-import { IS_LOGGED, keycloak, LOGOUT } from '../lib/keycloak';
+import { keycloak } from '../lib/keycloak/init';
+import { IS_LOGGED, LOGOUT } from '@/server/lib/keycloak/account';
 
 export default defineEventHandler(async (event) => {
 	const token = getCookie(event, 'x-acc-token');

@@ -1,8 +1,10 @@
-import { GET_PROFILE } from '@/server/lib/keycloak/profile';
+import { GET_GROUPS } from '@/server/lib/keycloak/group';
 
 export default defineEventHandler(async (event) => {
 	try {
-		const result = await GET_PROFILE(event, event.context.params.id);
+		const query = useQuery(event.req);
+		const where = query.where ? JSON.parse(query.where as any) : null;
+		const result = await GET_GROUPS(event, where);
 		return {
 			result: result,
 		};

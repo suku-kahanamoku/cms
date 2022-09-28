@@ -1,4 +1,4 @@
-import { SIGNUP } from '@/server/lib/keycloak';
+import { SIGNUP } from '@/server/lib/keycloak/account';
 
 export default defineEventHandler(async (event) => {
 	try {

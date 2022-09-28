@@ -1,8 +1,8 @@
-import { GET_PROFILE } from '@/server/lib/keycloak/profile';
+import { GET_GROUP } from '@/server/lib/keycloak/group';
 
 export default defineEventHandler(async (event) => {
 	try {
-		const result = await GET_PROFILE(event, event.context.params.id);
+		const result = await GET_GROUP(event, event.context.params.id);
 		return {
 			result: result,
 		};
